@@ -4,7 +4,12 @@ const routes = [
         path: '/',
         component: () => import('layouts/MainLayout.vue'),
         children: [
-            { path: '/', component: () => import('src/pages/AuthPage.vue') },
+            { path: '/', component: () => import('src/pages/AuthPage.vue'), meta: {
+                requiresUnauth: true,
+                breadcrumb: ( route ) => ([
+                    { name: 'Sign In' },
+                ])
+            } },
             { path: '/home', component: () => import('pages/HomePage.vue'), meta: { 
                     requiresAuth: true, 
                     breadcrumb: ( route ) => ([

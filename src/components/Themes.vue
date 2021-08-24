@@ -8,7 +8,7 @@
 
         <q-color v-model="primary" v-bind="pickerOptions" />
 
-        <Expandable label="Advanced Options">
+        <Expandable label="Advanced Options" classes="bg-primary q-mt-lg">
             <template #content>
                 <q-color v-model="secondary" v-bind="pickerOptions" />
                 <q-color v-model="accent" v-bind="pickerOptions" />
@@ -20,30 +20,24 @@
         </Expandable>
 
     </template>
+    <template #actions>
+        <q-btn label="Add Theme" flat color="accent" />
+    </template>
 </Expandable>
 
 <ThemeCard v-if="colorForm.primary && colorForm.accent && colorForm.secondary" label="Example Theme" 
     :colors="colorForm" 
     :scaleAccent="this.getScale(colorForm.primary, colorForm.accent)" 
     :scaleSecondary="this.getScale(colorForm.primary, colorForm.secondary)" 
-    example nocontent>
+    :primaryIsDark="isDark(colorForm.primary)"
+    example nocontent handle>
     <template #subtitle>
         This is an example of how your board will look.
     </template>
 </ThemeCard>
 
 <div v-for="theme in data" :key="theme.id">
-    <!-- {{ theme.data.primaryColor }}
-    {{ theme.data.secondaryColor }}
-    {{ theme.data.textColor }} -->
-    <!-- <ThemeCard :label="theme.data.name"
-        :colors="{
-            primary: theme.data.primaryColor,
-            secondary: theme.data.secondaryColor,
-            accent: theme.data.textColor,
-        }"
-        :mixAccent="this.getMixAccent(theme.data.primaryColor, theme.data.textColor)"
-        :mixSecondary="this.getMixSecondary(theme.data.primaryColor, theme.data.secondaryColor)" /> -->
+
 </div>
 
 <!-- <q-card :style="{ backgroundColor: form.primaryColor, color: form.textColor }" class="q-mt-lg shadow-3" >

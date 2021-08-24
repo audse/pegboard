@@ -13,11 +13,11 @@ const color = {
         return {
             primary: '#333333', // main ui background color
             accent: '#fefefe', // text color
-            secondary: '#000000', // ui secondary color 
-            info: '#887700',
-            warning: 'orange',
-            positive: 'green',
-            negative: '#bf0700',
+            secondary: '#222222', // ui secondary color 
+            info: '#849CFF',
+            warning: '#DFA726',
+            positive: '#84B129',
+            negative: '#706E6A',
 
             palette: [
                 '#fefefe', '#9db4c0', '#5c6b73', '#333333', '#f94144', '#f3722c', '#f8961e', '#f9c74f', '#a5be00', '#679436', '#43aa8b', '#0081a7', 
@@ -74,7 +74,7 @@ const color = {
             //
         },
 
-        isDarkColor: function (color) {
+        isDark: function (color) {
             if ( colors.brightness(color) < 128 ) {
                 return true
             } else {
@@ -82,7 +82,7 @@ const color = {
             }
         },
 
-        isLightColor: function (color) {
+        isLight: function (color) {
             if ( colors.brightness(color) >= 128 ) {
                 return true
             } else {

@@ -2,10 +2,10 @@
 <template>
     
 
-<q-card class="bg-secondary text-accent q-mb-md" flat>
+<q-card :class="[classes ? classes : 'bg-secondary', 'text-accent', 'q-mb-md']" flat>
 
     <!-- Header -->
-    <q-card-actions @click="expand = !expand">
+    <q-card-actions @click="expand = !expand" class="cursor-pointer">
         <div v-if="label" class="text-h6">{{ label }}</div>
         <slot name="label"></slot> <!-- Optional label slot if not using the shorthand label prop -->
         <q-space />
@@ -40,6 +40,7 @@ export default defineComponent({
     name: 'Expandable',
     props: {
         label: String,
+        classes: String,
 
     },
 

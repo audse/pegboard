@@ -1,4 +1,4 @@
-# pegboard (pegboard)
+# pegboard
 
 Pegboard is a flexible project management app.
 

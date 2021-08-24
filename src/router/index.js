@@ -30,8 +30,11 @@ export default route(function (/* { store, ssrContext } */) {
 
   Router.beforeEach(async (to, from, next) => {
     const auth = to.meta.requiresAuth
+    const unauth = to.meta.requiresUnauth
     if (auth && !await firebase.getCurrentUser()) {
       next('/');
+    } else if (unauth && await firebase.getCurrentUser()) {
+        next('/home')
     } else {
       next();
     }
