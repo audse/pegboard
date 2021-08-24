@@ -1,12 +1,12 @@
 
 <template>
 
-<div class="q-py-lg q-px-md">
+<div class="q-py-lg q-px-md q-my-md">
     <div class="text-h4">{{ user }}</div>
     <div class="text-subtitle-1 text-info">{{ email }}</div>
 </div>
 
-<q-list>
+<q-list class="q-mt-md">
     <q-item clickable to="/themes/" class="text-accent" active-class="bg-primary"><span class="q-pt-sm">Themes Editor</span></q-item>
 </q-list>
 

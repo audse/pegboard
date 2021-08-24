@@ -2,20 +2,21 @@
 <template>
     
 
-<q-card :class="[classes ? classes : 'bg-secondary', 'text-accent', 'q-mb-md']" flat>
+<q-card :class="[classes ? classes : 'bg-secondary', 'text-accent', 'q-mb-md', 'border-secondary']" flat :bordered="outline ? true : false">
 
     <!-- Header -->
     <q-card-actions @click="expand = !expand" class="cursor-pointer">
-        <div v-if="label" class="text-h6">{{ label }}</div>
+        <div v-if="label" class="text-smallheading">{{ label }}</div>
         <slot name="label"></slot> <!-- Optional label slot if not using the shorthand label prop -->
         <q-space />
         <slot name="addon"></slot>
-        <q-btn color="info" round flat dense :icon="expand ? 'keyboard_arrow_up' : 'keyboard_arrow_down'" />
+        <q-btn v-if="!icon" color="info" round flat dense :icon="expand ? 'keyboard_arrow_up' : 'keyboard_arrow_down'" />
+        <q-btn v-if="icon" color="info" round flat dense :icon="icon" />
     </q-card-actions>
 
     <!-- Content -->
     <q-slide-transition>
-        <div v-show="expand">
+        <div v-show="expand && !disabled">
             <slot name="before-content"></slot>
 
             <q-card-section class="q-mb-md">
@@ -42,12 +43,22 @@ export default defineComponent({
         label: String,
         classes: String,
 
+        open: Boolean, // defaults to closed
+        outline: Boolean, // defaults to no outline
+
+        icon: String,
+
+        disabled: Boolean,
     },
 
     data: function () {
         return {
             expand: false,
         }
+    },
+
+    created () {
+        if ( this.open ) this.expand = true
     }
 })
 

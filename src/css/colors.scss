@@ -1,4 +1,8 @@
 
+.border-secondary {
+    border: 2px solid $secondary;
+}
+
 $primary-tint-50: mix($primary, $accent);
 $primary-tint-75: mix($accent, $primary-tint-50);
 $primary-tint-100: mix($accent, $primary-tint-75);
