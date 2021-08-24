@@ -35,5 +35,11 @@ yarn-error.log*
 # Custom Files
 .vscode
 /src/boot/firebase.js
-.package.json
+package.json
 quasar.conf.js
+babel.config.js
+jsconfig.js
+.editorconfig
+.eslintignore
+.eslintrc.js
+.postcssrc.js
