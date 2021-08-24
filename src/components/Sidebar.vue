@@ -1,7 +1,7 @@
 
 <template>
 
-<div class="q-py-lg q-px-md q-my-md">
+<div class="q-py-lg q-px-md q-mt-ms q-mb-lg">
     <div class="text-h4">{{ user }}</div>
     <div class="text-subtitle-1 text-info">{{ email }}</div>
 </div>

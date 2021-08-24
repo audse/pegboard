@@ -40,6 +40,7 @@ const cache = {
 
             db.getFromCache(this.cachePath).then( (result) => {
                 this.data = result
+                console.log(result)
             })
         },
 
@@ -133,7 +134,7 @@ const cache = {
             if ( path.user && path.user !== 'all' ) formattedPath.push( { document: path.user } )
 
             if ( path.board ) formattedPath.push( {collection: 'boards'} )
-            if ( path.board && path.board !== 'all' ) formattedPath.push( { document: path.board}  )
+            if ( path.board && path.board !== 'all' ) formattedPath.push( { document: path.board }  )
 
             if ( path.theme ) formattedPath.push( {collection: 'themes'} )
             if ( path.theme && path.theme !== 'all' ) formattedPath.push( { document: path.theme } )

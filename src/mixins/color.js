@@ -8,20 +8,25 @@ const color = {
     data: function () {
         return {
 
-            name: null,
+            colorForm: {
+                name: null,
+
+                primary: '#333333', // main ui background color
+                accent: '#fefefe', // text color
+                secondary: '#222222', // ui secondary color 
+                info: '#00b4d8',
+                warning: '#ffb703',
+                positive: '#52b788',
+                negative: '#9b2226',
+            },
 
             advanced: false,
-            primary: '#333333', // main ui background color
-            accent: '#fefefe', // text color
-            secondary: '#222222', // ui secondary color 
-            info: '#00b4d8',
-            warning: '#ffb703',
-            positive: '#52b788',
-            negative: '#9b2226',
 
             pickerOptions: {
                 class: 'q-mt-sm full-width',
                 defaultView: 'palette',
+                flat: true,
+
                 palette: [
                     '#3f1a25','#362420','#312e23','#2a3a2a','#1e4d3b','#223f53','#273056','#2f2a50','#3a2a4e','#401f3e', // Deep Rainbow
                     '#f94144','#f3722c','#f8961e','#f9c74f','#a5be00','#679436','#43aa8b','#0081a7','#184e77','#9d4edd', // Bright rainbow
@@ -38,7 +43,6 @@ const color = {
 
                     
                 ],
-                flat: true,
             }
         }
     },
@@ -46,21 +50,22 @@ const color = {
     computed: {
 
         autoSecondary: function () {
-            return chroma(this.primary).darken().hex()
+            return chroma(this.colorForm.primary).darken().hex()
         },
 
         autoAccent: function () {
-            if ( this.isLight(this.primary) ) {
-                return chroma.mix(this.primary, 'black', 0.9).hex()
+            if ( this.isLight(this.colorForm.primary) ) {
+                return chroma.mix(this.colorForm.primary, 'black', 0.9).hex()
             } else {
-                return chroma.mix(this.primary, 'white', 0.9).hex()
+                return chroma.mix(this.colorForm.primary, 'white', 0.9).hex()
             }
         },
+
     },
 
     watch: {
 
-        primary: function () {
+        advanced: function () {
             if ( !this.advanced ) {
                 this.autoEverything()
             }
@@ -70,12 +75,14 @@ const color = {
     methods: {
 
         autoEverything: function () {
-            this.accent = this.autoAccent
-            this.secondary = this.autoSecondary
-            this.info = this.autoColorMix(this.primary, '#00b4d8')
-            this.warning = this.autoColorMix(this.primary, '#ffb703')
-            this.positive = this.autoColorMix(this.primary, '#52b788')
-            this.negative = this.autoColorMix(this.primary, '#9b2226')
+            if ( !this.advanced ) {
+                this.colorForm.accent = this.autoAccent
+                this.colorForm.secondary = this.autoSecondary
+                this.colorForm.info = this.autoColorMix(this.colorForm.primary, '#00b4d8')
+                this.colorForm.warning = this.autoColorMix(this.colorForm.primary, '#ffb703')
+                this.colorForm.positive = this.autoColorMix(this.colorForm.primary, '#52b788')
+                this.colorForm.negative = this.autoColorMix(this.colorForm.primary, '#9b2226')
+            }
         },
 
         autoColorMix: function (colorA, colorB) {

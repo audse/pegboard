@@ -2,11 +2,18 @@
 
 <template>
     
-<q-card :style="{ backgroundColor: colors.primary, color: colors.accent }" class="shadow-3" >
+<q-card :style="{ backgroundColor: colors.primary, color: colors.accent }" flat>
 
     <q-card-section :style="{ backgroundColor: scaleSecondary[4] }" class="q-px-lg">
         <q-item class="text-h6 q-px-none q-pt-lg q-pb-sm" :style="{ fontWeight: 700, color: colors.accent}">
+                
+            <q-item-section v-if="handle" side class="q-pa-none q-ml-none q-mr-md">
+                <q-icon name="drag_indicator" class="handle" :style="{ color: scaleAccent[2] }" />
+            </q-item-section>
+            <q-item-section class="q-pa-none q-ma-none" :style="{ color: colors.accent }">
                 {{ label }}
+            </q-item-section>
+
         </q-item>
         <div class="text-subtitle-1 q-mt-xs" :style="{color: scaleAccent[7]}">
             <slot name="subtitle"></slot>
@@ -70,6 +77,49 @@
     </q-card-section>
 
     <q-card-section v-if="!nocontent">
+
+        <div v-if="form">
+
+            <q-list>
+                <q-item :style="{ color: colors.accent }">
+                    <q-item-section class="weight-extrabold" :style="{ color: scaleAccent[4] }" side>Primary</q-item-section>
+                    <q-item-section>{{ colors.primary }}</q-item-section>
+                    <q-item-section side><q-btn icon="colorize" round unelevated :style="{color: colors.accent, backgroundColor: colors.primary }" /></q-item-section>
+                </q-item>
+                <q-item :style="{ color: colors.accent }">
+                    <q-item-section class="weight-extrabold" :style="{ color: scaleAccent[4] }" side>Secondary</q-item-section>
+                    <q-item-section>{{ colors.secondary }}</q-item-section>
+                    <q-item-section side><q-btn icon="colorize" round unelevated :style="{color: colors.accent, backgroundColor: colors.secondary }" /></q-item-section>
+                </q-item>
+                <q-item :style="{ color: colors.accent }">
+                    <q-item-section class="weight-extrabold" :style="{ color: scaleAccent[4] }" side>Accent</q-item-section>
+                    <q-item-section>{{ colors.accent }}</q-item-section>
+                    <q-item-section side><q-btn icon="colorize" round unelevated :style="{color: colors.accent, backgroundColor: scaleAccent[0] }" /></q-item-section>
+                </q-item>
+                <q-item :style="{ color: colors.accent }">
+                    <q-item-section class="weight-extrabold" :style="{ color: scaleAccent[4] }" side>Info</q-item-section>
+                    <q-item-section>{{ colors.info }}</q-item-section>
+                    <q-item-section side><q-btn icon="colorize" round unelevated :style="{color: colors.accent, backgroundColor: colors.info }" /></q-item-section>
+                </q-item>
+                <q-item :style="{ color: colors.accent }">
+                    <q-item-section class="weight-extrabold" :style="{ color: scaleAccent[4] }" side>Warning</q-item-section>
+                    <q-item-section>{{ colors.warning }}</q-item-section>
+                    <q-item-section side><q-btn icon="colorize" round unelevated :style="{color: colors.accent, backgroundColor: colors.warning }" /></q-item-section>
+                </q-item>
+                <q-item :style="{ color: colors.accent }">
+                    <q-item-section class="weight-extrabold" :style="{ color: scaleAccent[4] }" side>Positive</q-item-section>
+                    <q-item-section>{{ colors.positive }}</q-item-section>
+                    <q-item-section side><q-btn icon="colorize" round unelevated :style="{color: colors.accent, backgroundColor: colors.positive }" /></q-item-section>
+                </q-item>
+                <q-item :style="{ color: colors.accent }">
+                    <q-item-section class="weight-extrabold" :style="{ color: scaleAccent[4] }" side>Negative</q-item-section>
+                    <q-item-section>{{ colors.negative }}</q-item-section>
+                    <q-item-section side><q-btn icon="colorize" round unelevated :style="{color: colors.accent, backgroundColor: colors.negative }" /></q-item-section>
+                </q-item>
+            </q-list>
+
+        </div>
+
         <slot name="content"></slot>
     </q-card-section>
 
@@ -99,6 +149,7 @@ export default defineComponent({
     props: {
         label: String,
         example: Boolean,
+        form: Boolean,
 
         handle: Boolean,
         nocontent: Boolean,
