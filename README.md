@@ -1,6 +1,6 @@
 # pegborard (pegboard)
 
-A Project Management app
+Pegboard is a flexible project management app.
 
 ## Install the dependencies
 ```bash
