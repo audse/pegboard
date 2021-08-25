@@ -38,8 +38,13 @@ yarn-error.log*
 package.json
 quasar.conf.js
 babel.config.js
-jsconfig.js
+jsconfig.json
 .editorconfig
 .eslintignore
 .eslintrc.js
 .postcssrc.js
+firebase.json
+.firebaserc
+firestore-debug.log
+firestore-indexes.json
+firestore.rules

@@ -2,6 +2,7 @@ import { boot } from 'quasar/wrappers'
 import firebase from 'firebase'
 
 
+
 export default (async ({app}) => {
 
     let auth = await firebase.getCurrentUser()
