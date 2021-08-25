@@ -133,6 +133,9 @@ const cache = {
             if ( path.user ) formattedPath.push( {collection: 'users'} )
             if ( path.user && path.user !== 'all' ) formattedPath.push( { document: path.user } )
 
+            if ( path.data ) formattedPath.push( {collection: 'data'} )
+            if ( path.data && path.data !== 'all' ) formattedPath.push( { document: path.data } )
+
             if ( path.board ) formattedPath.push( {collection: 'boards'} )
             if ( path.board && path.board !== 'all' ) formattedPath.push( { document: path.board }  )
 

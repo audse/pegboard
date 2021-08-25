@@ -12,7 +12,10 @@
 
 <AllBoards v-if="open" listWidget />
 
-<q-btn class="fixed-bottom-left q-mb-lg q-ml-md bg-primary" flat color="accent" label="sign out" @click="signOut()" />
+<div class="fixed-bottom-left q-px-md q-py-lg">
+    <q-btn flat color="info" label="Preferences" to="/preferences" />
+    <q-btn flat color="accent" label="sign out" @click="signOut()" />
+</div>
 
 </template>
 

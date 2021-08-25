@@ -82,7 +82,7 @@ export default defineComponent({
 
         emailSignUp: function (email, password) {
             firebase.auth().createUserWithEmailAndPassword(email, password).then( auth => {
-                this.$q.notify({ color: 'primary', message: 'Signed up as '+result.user.email })
+                this.$q.notify({ color: 'primary', message: 'Signed up as '+auth.user.email })
                 this.$router.push('/home')
             }).catch( error => {
                 console.log(error)
@@ -91,7 +91,7 @@ export default defineComponent({
 
         emailSignIn: function (email, password) {
             firebase.auth().signInWithEmailAndPassword(email, password).then( (user) => {
-                this.$q.notify({ color: 'primary', message: 'Signed in as '+result.user.email })
+                this.$q.notify({ color: 'primary', message: 'Signed in as '+auth.user.email })
                 this.$router.push('/home')
             }).catch( error => {
                 console.log(error)

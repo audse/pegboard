@@ -14,7 +14,7 @@
         </q-toolbar>
         <q-toolbar>
             <q-breadcrumbs active-color="info">
-                <q-breadcrumbs-el v-for="(crumb, index) in breadcrumbs" :key="'breadcrumb'+index" :label="crumb.name" :to="crumb.path" />
+                 <q-breadcrumbs-el v-for="(crumb, index) in breadcrumbs" :key="'breadcrumb'+index" :label="crumb.name" :to="crumb.path" />
             </q-breadcrumbs>
         </q-toolbar>
     </q-header>
@@ -85,10 +85,10 @@ export default defineComponent({
 
     watch: {
         '$route': function () {
-            setCssVar('primary', '#1976D2')
-            setCssVar('secondary', colors.lighten('#1976D2', -10))
-            setCssVar('accent', colors.lighten('#1976D2', 80))
-            setCssVar('info', colors.lighten('#1976D2', 50))
+            // setCssVar('primary', '#1976D2')
+            // setCssVar('secondary', colors.lighten('#1976D2', -10))
+            // setCssVar('accent', colors.lighten('#1976D2', 80))
+            // setCssVar('info', colors.lighten('#1976D2', 50))
         }
     },
 

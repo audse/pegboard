@@ -13,7 +13,15 @@ const routes = [
             { path: '/home', component: () => import('pages/HomePage.vue'), meta: { 
                     requiresAuth: true, 
                     breadcrumb: ( route ) => ([
-                        { name: 'Home', },
+                        { name: 'home', },
+                    ]),
+                }
+            },
+            { path: '/preferences', component: () => import('pages/PreferencesPage.vue'), meta: { 
+                    requiresAuth: true, 
+                    breadcrumb: ( route ) => ([
+                        { name: 'home', path: '/home' },
+                        { name: 'preferences', },
                     ]),
                 }
             },
@@ -21,8 +29,8 @@ const routes = [
             { path: '/themes', component: () => import('src/pages/ThemesPage.vue'), meta: {
                     requiresAuth: true,
                     breadcrumb: ( route) => ([
-                        { name: 'Home', path: '/home' },
-                        { name: 'Themes', },
+                        { name: 'home', path: '/home' },
+                        { name: 'themes', },
                     ]),
                 }
             },
@@ -30,8 +38,8 @@ const routes = [
             { path: '/boards', component: () => import('pages/BoardsPage.vue'), meta: { 
                     requiresAuth: true, 
                     breadcrumb: ( route ) => ([
-                        { name: 'Home', path: '/home' },
-                        { name: 'Boards',},
+                        { name: 'home', path: '/home' },
+                        { name: 'boards',},
                     ]),
                 }
             },
@@ -39,8 +47,8 @@ const routes = [
             { path: '/board/:name/:id', component: () => import('src/pages/BoardPage.vue'), meta: {
                     requiresAuth: true,
                     breadcrumb: ( route ) => ([
-                        { name: 'Home', path: '/home' },
-                        { name: 'Boards', path: '/boards' },
+                        { name: 'home', path: '/home' },
+                        { name: 'boards', path: '/boards' },
                         { name: route.params.name }
                     ]),
                 }

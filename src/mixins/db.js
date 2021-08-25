@@ -62,7 +62,11 @@ export default {
 
         if ( cache && Array.isArray(cache) ) {
 
-            return cache.reduce( (a, b) => Math.max(a.updatedAt ? a.updatedAt : 0, b.updatedAt ? b.updatedAt : 0) )
+            try {
+                return cache.reduce( (a, b) => Math.max(a.updatedAt ? a.updatedAt : 0, b.updatedAt ? b.updatedAt : 0) )
+            } catch (e) {
+                return 0
+            }
 
         } else if ( cache ) {
 
