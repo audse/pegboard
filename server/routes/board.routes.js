@@ -9,6 +9,7 @@ module.exports = app => {
 
     router.get('/:id', Board.find_by_id)
     router.put('/:id', Board.find_by_id_and_update)
+    router.delete('/:id', Board.find_by_id_and_delete)
 
     router.get('/user/:user_id', Board.find_by_user)
 

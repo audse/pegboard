@@ -45,6 +45,10 @@ exports.find_by_user = ( request, response ) => {
     
     const request_user_id = request.params.user_id
 
+    if ( !request_user_id ) response.status(404).send({
+        message: 'The requested user could not be found.'
+    })
+
     Board.find( { user_id: request_user_id } ).then( data => {
 
         if ( !data ) response.status(404).send({
@@ -62,7 +66,7 @@ exports.find_by_user = ( request, response ) => {
 
 exports.find_by_id_and_update = ( request, response ) => {
 
-    if ( !request.body ) return response.status(400).send({
+    if ( !request.body ) return response.status(404).send({
         message: 'Data cannot be empty.'
     })
 
@@ -80,8 +84,27 @@ exports.find_by_id_and_update = ( request, response ) => {
         
     }).catch( e => {
         response.status(500).send({
-            message: 'There was a problem retrieving boards.'
+            message: 'There was a problem retrieving the board.'
         })
     })
 
+}
+
+exports.find_by_id_and_delete = ( request, response ) => {
+
+    const id = request.params.id
+
+    Board.findByIdAndRemove( id ).then( data => {
+        if ( !data ) response.status(404).send({
+            message: 'The requested board could not be found.'
+        })
+
+        else response.send({
+            message: 'The board was successfully deleted.'
+        })
+    }).catch( e => {
+        response.status(500).send({
+            message: 'There was a problem deleting the board.'
+        })
+    })
 }

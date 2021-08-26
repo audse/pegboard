@@ -6,6 +6,7 @@
     <q-input v-model="form.name" label="Name" />
     <q-input v-model="form.description" label="Description" />
     <q-btn label="Submit" @click="updateBoard" />    
+    {{ form }}
     </div>
 </q-page>
 
