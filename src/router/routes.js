@@ -10,6 +10,10 @@ const routes = [
                     { name: 'Sign In' },
                 ])
             } },
+            
+            { path: '/board/:id', component: () => import('pages/GetBoardPage.vue') },
+            { path: '/board/add', component: () => import('pages/AddBoardPage.vue') },
+
             { path: '/home', component: () => import('pages/HomePage.vue'), meta: { 
                     requiresAuth: true, 
                     breadcrumb: ( route ) => ([

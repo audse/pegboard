@@ -4,6 +4,7 @@ import routes from './routes'
 
 import firebase from 'firebase'
 
+
 /*
  * If not building with SSR mode, you can
  * directly export the Router instantiation;
