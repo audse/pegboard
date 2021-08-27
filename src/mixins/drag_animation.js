@@ -5,7 +5,6 @@ const drag_animation = {
 
         return {
             drag: false,
-            row: true,
         }
 
     },
@@ -18,7 +17,6 @@ const drag_animation = {
 
                 componentData: {
                     tag: 'div',
-                    type: 'transition-group',
                     name: !this.drag ? 'flip-list' : null
                 },
 
@@ -26,9 +24,10 @@ const drag_animation = {
                 animation: 250,
                 easing: "cubic-bezier(0.5, 0, 0, 0.5)",
 
+                group: 'drag_group',
+
                 disabled: false,
 
-                class: this.row ? 'row q-col-gutter-sm' : '',
                 ghostClass: 'ghost',
                 dragClass: 'dragging',
                 chosenClass: 'chosen',

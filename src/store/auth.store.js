@@ -7,6 +7,8 @@ const UNAUTHORIZED = {
 }
 
 export default {
+    
+    namespaced: true,
 
     state: {
         is_authorized: false,

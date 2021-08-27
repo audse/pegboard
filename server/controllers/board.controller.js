@@ -80,7 +80,8 @@ exports.find_by_id_and_update = ( request, response ) => {
     const request_body = {
         name: request_name, 
         descriptions: request_description, 
-        order: request_order
+        order: request_order,
+        updated: Date.now,
     }
 
     Board.findByIdAndUpdate( id, request_body, { useFindAndModify: false } ).then( data => {
@@ -89,9 +90,7 @@ exports.find_by_id_and_update = ( request, response ) => {
             message: 'An error occurred attempting to update provided board.'
         })
 
-        else response.send({
-            message: 'The board was successfully updated.'
-        })
+        else response.send(data)
         
     }).catch( e => {
         response.status(500).send({

@@ -13,8 +13,9 @@
 
             <slot name="header"></slot>
 
-            <Warning :error="error" />
         </q-card-actions>
+
+        <Warning :error="error" />
 
         <q-card-section class="q-pb-lg">
             <q-tab-panels v-model="tab" animated class="bg-primary q-pb-lg" :swipeable="menu ? true : false">

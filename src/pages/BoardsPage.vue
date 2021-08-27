@@ -4,15 +4,14 @@
 
 <Heading h2 title="Your Boards" />
 
+<BoardForm />
 
 <!-- All Boards -->
 <div v-if="boards_exist">
 
-    <draggable :list="boards.data" item-key="_id" v-bind="drag_animation_props" @start="drag=true" @end="drag=false" >
-        <template #item="{ element }">
-            <BoardSheet :board="element" columns handle />
-        </template>
-    </draggable>
+    <Drag v-model="boards" v-slot="element_props" col_4 gutter_sm>
+        <BoardSheet :board_id="element_props.element._id" :index="element_props.index" handle />
+    </Drag>
 
 </div>
 
@@ -22,19 +21,15 @@
 <script>
 
 // Setup
-import { defineComponent, ref, reactive } from 'vue'
+import { defineComponent, onMounted, computed, ref } from 'vue'
+import Vue from 'vue'
 
-// Backend
-import BoardService from './../../server/services/board.service'
-
-// Libraries
-import draggable from 'vuedraggable'
+import { useStore } from 'vuex'
 
 // Components
-import BoardSheet from './../components/Nested/BoardSheet'
-
-// Mixins
-import { drag_animation } from './../mixins/drag_animation'
+import Drag from './../components/Elements/Drag'
+import BoardForm from './../components/Nested/Forms/Board.form'
+import BoardSheet from './../components/Nested/Sheets/Board.sheet'
 
 // Logic
 export default defineComponent({
@@ -42,66 +37,43 @@ export default defineComponent({
     name: 'BoardsPage',
 
     components: {
-        
-        // Libraries
-        draggable,
 
         // Components
+        Drag,
+        BoardForm,
         BoardSheet,
     },
 
-    mixins: [
-        drag_animation
-    ],
+    setup () {
 
-    data: function () {
-        return {
-            boards: {},
-            user_id: null,
+        const store = useStore()
+        
+        const user = store.state.auth.current_user
+        const user_id = user ? user.uid : null
 
-            error: null,
+        const boards = ref( store.state.board.boards )
 
-            form: {
-                name: null,
-                description: null,
-            }
-        }
-    },
-
-    created () {
-        if ( this.$auth ) this.id = this.$auth.uid
-        this.update_boards()
-    },
-
-    computed: {
-
-        boards_exist: function () {
-            if ( this.boards && this.boards.data && this.boards.data.length >= 1 ) return true
+        const boards_exist = computed( () => {
+            if ( boards.value.length > 0 ) return true
             else return false
+        })
+
+        const get_boards = async () => {
+            if ( user_id ) boards.value = await store.dispatch('board/reload', user_id)
+            else boards.value = []
         }
+
+        onMounted (get_boards)
+
+        return {
+            store,
+            user_id,
+            boards,
+            // get_boards,
+            boards_exist
+        }
+
     },
-
-    methods: {
-
-        update_boards: function () {
-
-            if ( this.id ) BoardService.find_by_user( this.id ).then( data => {
-                if ( data ) this.boards = data
-                else this.error = 'No boards.'
-            })
-
-        },
-
-        add_board: function () {
-
-            this.form.user_id = this.user_id
-            BoardService.add( this.form ).then( data => {
-                if ( data ) this.$q.notify({ color: 'secondary', message: 'Board Added!'})
-                this.updateBoards()
-            })
-        }
-
-    }
 
 
 })

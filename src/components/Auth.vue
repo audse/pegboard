@@ -70,8 +70,9 @@ export default defineComponent({
     methods: {
 
         google: function () {
-            const provider = new firebase.auth.GoogleAuthProvider()
+            const provider = new firebase.auth().GoogleAuthProvider()
             firebase.auth().signInWithPopup(provider).then( result => {
+                this.$store.dispatch('check_auth')
                 console.log('result', result)
                 this.$q.notify({ color: 'primary', message: 'Signed in as '+result.user.email })
                 this.$router.push('/home')
@@ -82,6 +83,7 @@ export default defineComponent({
 
         emailSignUp: function (email, password) {
             firebase.auth().createUserWithEmailAndPassword(email, password).then( auth => {
+                this.$store.dispatch('check_auth')
                 this.$q.notify({ color: 'primary', message: 'Signed up as '+auth.user.email })
                 this.$router.push('/home')
             }).catch( error => {
@@ -90,7 +92,8 @@ export default defineComponent({
         },
 
         emailSignIn: function (email, password) {
-            firebase.auth().signInWithEmailAndPassword(email, password).then( (user) => {
+            firebase.auth().signInWithEmailAndPassword(email, password).then( auth => {
+                this.$store.dispatch('check_auth')
                 this.$q.notify({ color: 'primary', message: 'Signed in as '+auth.user.email })
                 this.$router.push('/home')
             }).catch( error => {

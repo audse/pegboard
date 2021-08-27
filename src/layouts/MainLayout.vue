@@ -35,6 +35,7 @@
 
 
 import { defineComponent, ref } from 'vue'
+import { useStore } from 'vuex'
 import firebase from 'firebase'
 
 import { useQuasar } from 'quasar'
@@ -58,6 +59,10 @@ export default defineComponent({
     setup () {
         const leftDrawerOpen = ref(false)
         const $q = useQuasar()
+
+        const store = useStore()
+        const user_display_name = store.state.auth.current_user.displayName
+        const user_email = store.state.auth.current_user.email
 
         return {
             leftDrawerOpen,
@@ -92,15 +97,15 @@ export default defineComponent({
         }
     },
 
-    created () {
-        firebase.auth().onAuthStateChanged( (auth) => {
-            if ( auth ) {
+    // created () {
+    //     firebase.auth().onAuthStateChanged( (auth) => {
+    //         if ( auth ) {
 
-                this.$auth = auth
-                this.user = auth.displayName
-                this.email = auth.email
-            }
-        })
-    },
+    //             this.$auth = auth
+    //             this.user = auth.displayName
+    //             this.email = auth.email
+    //         }
+    //     })
+    // },
 })
 </script>
