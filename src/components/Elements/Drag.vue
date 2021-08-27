@@ -4,7 +4,10 @@
 <draggable v-model="local_value" item-key="_id" v-bind="drag_options" @start="dragging=true" @end="dragging=false" :class="drag_class">
     <template #item="{ element, index }">
         <div class="col-xs-12 col-sm-6 col-lg-4">
+            <transition appear @before-appear="stagger_start" @appear="stagger_start" @after-appear="stagger_end"
+            :style="{ transitionDelay: ( index * 50 ).toString() + 'ms !important',}">
                 <slot :element="element" :index="index"></slot>
+            </transition>
         </div>
     </template>
 </draggable>
@@ -67,7 +70,6 @@ export default defineComponent({
                 },
 
                 tag: 'transition-group',
-                name: 'staggered-fade',
                 animation: 250,
                 easing: "cubic-bezier(0.5, 0, 0, 0.5)",
                 appear: true,
@@ -93,10 +95,20 @@ export default defineComponent({
         }
         
     },
+
+    methods: {
+
+        stagger_start ( event ) {
+            event.style.opacity = '0'
+        },
+
+        stagger_end ( event ) {
+            event.style.opacity = '1',
+            event.style.transition = '150ms'
+            
+        },
+
+    }
 })
 
 </script>
-
-<style scoped>
-
-</style>
