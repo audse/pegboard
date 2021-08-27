@@ -6,6 +6,7 @@ import Modal from '../components/Elements/Modal.vue'
 import Sheet from '../components/Elements/Sheet.vue'
 import TextInput from '../components/Elements/TextInput.vue'
 import Warning from '../components/Elements/Warning.vue'
+import Drag from '../components/Elements/Drag.vue'
 
 import CardSkeleton from '../components/Elements/CardSkeleton.vue'
 
@@ -19,6 +20,7 @@ export default ( ({ app }) => {
     app.component('Sheet', Sheet)
     app.component('TextInput', TextInput)
     app.component('Warning', Warning)
+    app.component('Drag', Drag)
     
     app.component('CardSkeleton', CardSkeleton)
 

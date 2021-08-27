@@ -22,12 +22,10 @@
 
 // Setup
 import { defineComponent, onMounted, computed, ref } from 'vue'
-import Vue from 'vue'
 
 import { useStore } from 'vuex'
 
 // Components
-import Drag from './../components/Elements/Drag'
 import BoardForm from './../components/Nested/Forms/Board.form'
 import BoardSheet from './../components/Nested/Sheets/Board.sheet'
 
@@ -39,7 +37,6 @@ export default defineComponent({
     components: {
 
         // Components
-        Drag,
         BoardForm,
         BoardSheet,
     },
@@ -69,7 +66,6 @@ export default defineComponent({
             store,
             user_id,
             boards,
-            // get_boards,
             boards_exist
         }
 

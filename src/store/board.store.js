@@ -18,7 +18,7 @@ export default {
         find_by_id_and_save ( state, data ) {
 
             const state_index = state.boards.findIndex( board => board._id === data.board_id )
-            if ( state_index ) state.boards.splice(state_index, 1, data.board)
+            if ( state_index !== null && state_index !== undefined ) state.boards.splice(state_index, 1, data.board)
             
         },
 
@@ -29,7 +29,7 @@ export default {
         remove_by_id_and_save ( state, data ) {
             if ( data.board_id ) {
                 const state_index = state.boards.findIndex( board => board._id === data.board_id )
-                if ( board ) state.boards.splice(state_index, 1)
+                if ( state_index !== null && state_index !== undefined ) state.boards.splice(state_index, 1)
             }
         }
 
@@ -90,9 +90,8 @@ export default {
 
                     }).catch( e => reject(e) )
 
-                } else {
-                    reject()
-                }
+                } else reject()
+                
             })
         },
 
@@ -101,24 +100,34 @@ export default {
             return new Promise ( (resolve, reject) => {
 
                 if ( data.board_id && data.data ) BoardService.find_by_id_and_update( data.board_id, data.data.value ).then( results => {
+                    
                     if ( results ) commit('find_by_id_and_save', {
                         board_id: data.board_id,
                         board: results.data
                     })
-
                     resolve(results)
+                    
                 }).catch( e => reject(e) )
             })
         },
 
-        async find_by_id_and_delete ( { dispatch }, board_id ) {
+        async find_by_id_and_delete ( { commit }, board_id ) {
 
-            if ( board_id && data ) {
+            return new Promise ( (resolve, reject) => {
 
-                BoardService.find_by_id_and_delete( board_id ).then( results => {
-                    commit('remove_by_id_and_save', board_id)
-                })
-            }
+                if ( board_id ) {
+
+                    BoardService.find_by_id_and_delete( board_id ).then( results => {
+
+                        commit('remove_by_id_and_save', {
+                            board_id: board_id
+                        })
+                        resolve(results)
+
+                    }).catch( e => reject(e) )
+                }
+            })
+            
         },
              
     }

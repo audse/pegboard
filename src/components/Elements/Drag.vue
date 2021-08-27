@@ -5,7 +5,7 @@
     <template #item="{ element, index }">
         <div class="col-xs-12 col-sm-6 col-lg-4">
             <transition appear @before-appear="stagger_start" @appear="stagger_start" @after-appear="stagger_end"
-            :style="{ transitionDelay: ( index * 50 ).toString() + 'ms !important',}">
+            :style="{ transitionDelay: ( index * 50 ).toString() + 'ms !important',}" leave-active-class="animated fadeOut">
                 <slot :element="element" :index="index"></slot>
             </transition>
         </div>

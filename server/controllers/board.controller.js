@@ -80,7 +80,7 @@ exports.find_by_id_and_update = ( request, response ) => {
     if ( request.body.name ) request_body.name = request.body.name
     if ( request.body.description ) request_body.description = request.body.description
     if ( request.body.order ) request_body.order = request.body.order
-    
+
     request_body.updated = Date.now()
 
     Board.findByIdAndUpdate( id, { $set: request_body }, { useFindAndModify: false, new: true } ).then( data => {
@@ -105,6 +105,7 @@ exports.find_by_id_and_delete = ( request, response ) => {
     const id = request.params.id
 
     Board.findByIdAndRemove( id ).then( data => {
+
         if ( !data ) response.status(404).send({
             message: 'The requested board could not be found.'
         })
@@ -112,6 +113,7 @@ exports.find_by_id_and_delete = ( request, response ) => {
         else response.send({
             message: 'The board was successfully deleted.'
         })
+        
     }).catch( e => {
         console.log(e)
         response.status(500).send({
