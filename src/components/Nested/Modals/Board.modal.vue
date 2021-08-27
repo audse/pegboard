@@ -9,8 +9,8 @@
     </template>
     <template #content>
 
-        <TextInput v-model="form_name" label="Board Name" />
-        <TextInput v-model="form_description" label="Description" />
+        <TextInput v-model="form.name" label="Board Name" />
+        <TextInput v-model="form.description" label="Description" />
 
         <Heading small title="Theme" />
 
@@ -39,7 +39,7 @@ export default defineComponent({
 
     emits: ['hide'],
 
-    setup ( props ) {
+    setup ( props, { emit } ) {
 
         const store = useStore()
 
@@ -47,17 +47,22 @@ export default defineComponent({
 
         const error = ref(null)
 
-        // const form = 
-
+        const form = ref({
+            name: board.value.name,
+            description: board.value.description
+        })
+        
         const find_by_id_and_update = async () => {
-            // store.dispatch('board/find_by_id_and_update', props.board_id, form)
+            store.dispatch('board/find_by_id_and_update', { board_id: props.board_id, data: form }).then( result => {
+                console.log(result)
+                emit('hide')
+            })
         }
 
         return {
             board,
             error,
-            // form_name,
-            // form_description,
+            form,
             find_by_id_and_update
         }
 

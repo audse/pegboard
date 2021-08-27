@@ -16,6 +16,7 @@ exports.add = ( request, response ) => {
     new_board.save( new_board ).then( data => {
         response.send(data)
     }).catch( e => {
+        console.log(e)
         response.status(500).send({
             message: 'An error occured while saving this board.'
         })
@@ -35,6 +36,7 @@ exports.find_by_id = ( request, response ) => {
         else response.send(data)
 
     }).catch( e => {
+        console.log(e)
         response.status(500).send({
             message: 'There was a problem retrieving boards.'
         })
@@ -58,6 +60,7 @@ exports.find_by_user = ( request, response ) => {
         else response.send(data)
 
     }).catch( e => {
+        console.log(e)
         response.status(500).send({
             message: 'There was a problem retrieving boards.'
         })
@@ -72,19 +75,15 @@ exports.find_by_id_and_update = ( request, response ) => {
 
     const id = request.params.id
 
-    // Only allow updating name, description, and order.
-    const request_name = request.body.name
-    const request_description = request.body.description
-    const request_order = request.body.order
+    let request_body = {}
 
-    const request_body = {
-        name: request_name, 
-        descriptions: request_description, 
-        order: request_order,
-        updated: Date.now,
-    }
+    if ( request.body.name ) request_body.name = request.body.name
+    if ( request.body.description ) request_body.description = request.body.description
+    if ( request.body.order ) request_body.order = request.body.order
+    
+    request_body.updated = Date.now()
 
-    Board.findByIdAndUpdate( id, request_body, { useFindAndModify: false } ).then( data => {
+    Board.findByIdAndUpdate( id, { $set: request_body }, { useFindAndModify: false, new: true } ).then( data => {
 
         if ( !data ) response.status(404).send({
             message: 'An error occurred attempting to update provided board.'
@@ -93,8 +92,9 @@ exports.find_by_id_and_update = ( request, response ) => {
         else response.send(data)
         
     }).catch( e => {
+        console.log(e)
         response.status(500).send({
-            message: 'There was a problem retrieving the board.'
+            message: `There was a problem retrieving the board.`,
         })
     })
 
@@ -113,6 +113,7 @@ exports.find_by_id_and_delete = ( request, response ) => {
             message: 'The board was successfully deleted.'
         })
     }).catch( e => {
+        console.log(e)
         response.status(500).send({
             message: 'There was a problem deleting the board.'
         })

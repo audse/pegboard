@@ -15,7 +15,7 @@
             {{ board._id }}
         </template>
         <template #actions>
-            <q-btn flat :label="'Go to '+board.name" :to="'/board/'+urlify(board.name, board.id)" />
+            <!-- <q-btn flat :label="'Go to '+board.name" :to="'/board/'+urlify(board.name, board.id)" /> -->
         </template>
     </Sheet>
 

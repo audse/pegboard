@@ -18,7 +18,6 @@ export default {
         find_by_id_and_save ( state, data ) {
 
             const state_index = state.boards.findIndex( board => board._id === data.board_id )
-
             if ( state_index ) state.boards.splice(state_index, 1, data.board)
             
         },
@@ -50,9 +49,7 @@ export default {
 
                     resolve(boards.data)
 
-                }).catch( e => {
-                    reject(e)
-                })
+                }).catch( e => reject(e) )
 
             })
 
@@ -73,9 +70,8 @@ export default {
                     })
 
                     resolve(board)
-                }).catch( e => {
-                    reject(e)
-                })
+
+                }).catch( e => reject(e) )
             })
         },
 
@@ -92,9 +88,7 @@ export default {
 
                         resolve(results)
 
-                    }).catch( e => {
-                        reject(e)
-                    })
+                    }).catch( e => reject(e) )
 
                 } else {
                     reject()
@@ -102,13 +96,18 @@ export default {
             })
         },
 
-        async find_by_id_and_update ( { commit }, board_id, data ) {
+        async find_by_id_and_update ( { commit }, data ) {
 
-            if ( board_id && data ) BoardService.find_by_id_and_update( board_id, data ).then( results => {
-                if ( results ) commit('find_by_id_and_save', {
-                    board_id: board_id,
-                    board: results.data
-                })
+            return new Promise ( (resolve, reject) => {
+
+                if ( data.board_id && data.data ) BoardService.find_by_id_and_update( data.board_id, data.data.value ).then( results => {
+                    if ( results ) commit('find_by_id_and_save', {
+                        board_id: data.board_id,
+                        board: results.data
+                    })
+
+                    resolve(results)
+                }).catch( e => reject(e) )
             })
         },
 
