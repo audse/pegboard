@@ -53,7 +53,17 @@ exports.find_by_id_and_update = ( request, response ) => {
 
     const id = request.params.id
 
-    List.findByIdAndUpdate( id, request.body, { useFindAndModify: false } ).then( data => {
+    const request_name = request.body.name
+    const request_description = request.body.descriptions
+    const request_order = request.body.order
+
+    const request_body = {
+        name: request_name,
+        description: request_description,
+        order: request_order
+    }
+
+    List.findByIdAndUpdate( id, request_body, { useFindAndModify: false } ).then( data => {
 
         if ( !data ) response.status(404).send({
             message: 'An error occurred attempting to update provided list.'

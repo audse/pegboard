@@ -11,6 +11,8 @@ module.exports = mongoose => {
         name: String,
         description: String,
 
+        order: Number,
+
         updated: { type: Date, default: Date.now },
 
     })

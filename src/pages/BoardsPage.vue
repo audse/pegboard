@@ -2,35 +2,62 @@
 
 <q-page class="q-px-md q-py-lg">
 
-<Heading h2 title="Your Boards" :subtitle="'User: '+id" />
+<Heading h2 title="Your Boards" />
 
-<div>
-<Heading h4 title="Add Board" />
-<TextInput v-model="form.name" label="Board Name" />
-<TextInput v-model="form.description" label="Board Description" />
-<q-btn flat label="Add" @click="addBoard" />
+
+<!-- All Boards -->
+<div v-if="boards_exist">
+
+    <draggable :list="boards.data" item-key="_id" v-bind="drag_animation_props" @start="drag=true" @end="drag=false" >
+        <template #item="{ element }">
+            <BoardSheet :board="element" columns handle />
+        </template>
+    </draggable>
+
 </div>
-
-{{ boards }}
 
 </q-page>
 
 </template>
-
 <script>
 
-import { defineComponent } from 'vue'
+// Setup
+import { defineComponent, ref, reactive } from 'vue'
 
-
+// Backend
 import BoardService from './../../server/services/board.service'
 
+// Libraries
+import draggable from 'vuedraggable'
+
+// Components
+import BoardSheet from './../components/Nested/BoardSheet'
+
+// Mixins
+import { drag_animation } from './../mixins/drag_animation'
+
+// Logic
 export default defineComponent({
+
     name: 'BoardsPage',
+
+    components: {
+        
+        // Libraries
+        draggable,
+
+        // Components
+        BoardSheet,
+    },
+
+    mixins: [
+        drag_animation
+    ],
 
     data: function () {
         return {
-            boards: [],
-            id: null,
+            boards: {},
+            user_id: null,
 
             error: null,
 
@@ -43,24 +70,33 @@ export default defineComponent({
 
     created () {
         if ( this.$auth ) this.id = this.$auth.uid
-        this.updateBoards()
+        this.update_boards()
+    },
+
+    computed: {
+
+        boards_exist: function () {
+            if ( this.boards && this.boards.data && this.boards.data.length >= 1 ) return true
+            else return false
+        }
     },
 
     methods: {
 
-        updateBoards: function () {
+        update_boards: function () {
 
-            BoardService.find_by_user( this.id ).then( data => {
+            if ( this.id ) BoardService.find_by_user( this.id ).then( data => {
                 if ( data ) this.boards = data
                 else this.error = 'No boards.'
             })
 
         },
 
-        addBoard: function () {
-            this.form.user_id = this.id
+        add_board: function () {
+
+            this.form.user_id = this.user_id
             BoardService.add( this.form ).then( data => {
-                this.$q.notify({ color: 'secondary', message: 'Board Added!'})
+                if ( data ) this.$q.notify({ color: 'secondary', message: 'Board Added!'})
                 this.updateBoards()
             })
         }

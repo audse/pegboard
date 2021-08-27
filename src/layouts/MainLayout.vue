@@ -38,7 +38,7 @@ import { defineComponent, ref } from 'vue'
 import firebase from 'firebase'
 
 import { useQuasar } from 'quasar'
-import { colors, getCssVar, setCssVar } from 'quasar'
+import { colors, getCssVar } from 'quasar'
 
 import Sidebar from 'src/components/Sidebar.vue'
 

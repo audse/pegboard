@@ -72,7 +72,18 @@ exports.find_by_id_and_update = ( request, response ) => {
 
     const id = request.params.id
 
-    Board.findByIdAndUpdate( id, request.body, { useFindAndModify: false } ).then( data => {
+    // Only allow updating name, description, and order.
+    const request_name = request.body.name
+    const request_description = request.body.description
+    const request_order = request.body.order
+
+    const request_body = {
+        name: request_name, 
+        descriptions: request_description, 
+        order: request_order
+    }
+
+    Board.findByIdAndUpdate( id, request_body, { useFindAndModify: false } ).then( data => {
 
         if ( !data ) response.status(404).send({
             message: 'An error occurred attempting to update provided board.'

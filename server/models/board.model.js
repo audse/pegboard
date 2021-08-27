@@ -12,6 +12,8 @@ module.exports = mongoose => {
 
         theme_id: String,
 
+        order: Number,
+        
         updated: { type: Date, default: Date.now },
 
     })

@@ -1,45 +1,50 @@
 import { route } from 'quasar/wrappers'
+import state from 'src/store/auth/state'
 import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory } from 'vue-router'
 import routes from './routes'
 
-import firebase from 'firebase'
+// import firebase from 'firebase'
 
 
-/*
- * If not building with SSR mode, you can
- * directly export the Router instantiation;
- *
- * The function below can be async too; either use
- * async/await or return a Promise which resolves
- * with the Router instance.
- */
+export default route(function ( { store, /*ssrContext*/ } )   {
 
-export default route(function (/* { store, ssrContext } */) {
-  const createHistory = process.env.SERVER
-    ? createMemoryHistory
-    : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory)
+    const createHistory = process.env.SERVER
+        ? createMemoryHistory
+        : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory)
 
-  const Router = createRouter({
-    scrollBehavior: () => ({ left: 0, top: 0 }),
-    routes,
+    const Router = createRouter({
 
-    // Leave this as is and make changes in quasar.conf.js instead!
-    // quasar.conf.js -> build -> vueRouterMode
-    // quasar.conf.js -> build -> publicPath
-    history: createHistory(process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE)
-  })
+        scrollBehavior: () => ({ left: 0, top: 0 }),
+        routes,
 
-  Router.beforeEach(async (to, from, next) => {
-    const auth = to.meta.requiresAuth
-    const unauth = to.meta.requiresUnauth
-    if (auth && !await firebase.getCurrentUser()) {
-      next('/');
-    } else if (unauth && await firebase.getCurrentUser()) {
-        next('/home')
-    } else {
-      next();
-    }
-  })
+        // Leave this as is and make changes in quasar.conf.js instead!
+        history: createHistory(process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE)
+    })
 
-  return Router
+    Router.beforeEach(async (to, from, next) => {
+
+        const requires_auth = to.meta.requires_auth
+        const requires_unauth = to.meta.requires_unauth
+
+        // if (auth && !await firebase.get_current_user()) {
+        //     next('/');
+        // } else if (unauth && await firebase.get_current_user()) {
+        //     next('/home')
+        // } else {
+        //     next();
+        // }
+    
+        // Check if the visitor is signed in or not
+        if ( await store.dispatch('check_auth') ) {
+            if ( requires_unauth ) next( '/home' ) // Redirect to signed-in home page
+            else next()
+        } else {
+            if ( requires_auth ) next( '/' ) // Redirect to sign-in/sign-up page
+            else next()
+        }
+
+
+    })
+
+    return Router
 })
