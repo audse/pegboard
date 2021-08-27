@@ -10,7 +10,7 @@
                 Pegboard
             </q-toolbar-title>
 
-            <div class="text-info">{{ user }}</div>
+            <div class="text-info">{{ current_user.displayName }}</div>
         </q-toolbar>
         <q-toolbar>
             <q-breadcrumbs active-color="info">
@@ -35,11 +35,8 @@
 
 
 import { defineComponent, ref } from 'vue'
-import { useStore } from 'vuex'
-import firebase from 'firebase'
-
-import { useQuasar } from 'quasar'
 import { colors, getCssVar } from 'quasar'
+import { useStore } from 'vuex'
 
 import Sidebar from 'src/components/Sidebar.vue'
 
@@ -49,17 +46,15 @@ export default defineComponent({
         Sidebar
     },
 
-    data: function () {
-        return {
-            user: '',
-            email: ''
-        }
-    },
-
     setup () {
+
+        const store = useStore()
+        const current_user = store.state.auth.current_user
+
         const leftDrawerOpen = ref(false)
 
         return {
+            current_user,
             leftDrawerOpen,
             toggleLeftDrawer () {
                 leftDrawerOpen.value = !leftDrawerOpen.value
@@ -81,26 +76,7 @@ export default defineComponent({
       breadcrumbs: function () {
           return this.$route.meta.breadcrumb ? this.$route.meta.breadcrumb(this.$route) : undefined
         }  
-    },
+    }
 
-    watch: {
-        '$route': function () {
-            // setCssVar('primary', '#1976D2')
-            // setCssVar('secondary', colors.lighten('#1976D2', -10))
-            // setCssVar('accent', colors.lighten('#1976D2', 80))
-            // setCssVar('info', colors.lighten('#1976D2', 50))
-        }
-    },
-
-    // created () {
-    //     firebase.auth().onAuthStateChanged( (auth) => {
-    //         if ( auth ) {
-
-    //             this.$auth = auth
-    //             this.user = auth.displayName
-    //             this.email = auth.email
-    //         }
-    //     })
-    // },
 })
 </script>

@@ -11,7 +11,8 @@ module.exports = app => {
     router.put('/:id', List.find_by_id_and_update)
     router.delete('/:id', List.find_by_id_and_delete)
 
-    router.get('/board/:board_id', List.find_by_board)
+    // router.get('/user/:user_id', List.find_by_user)
+    router.get('/user/:user_id/board/:board_id', List.find_by_board)
 
     app.use('/api/list', router)
 }

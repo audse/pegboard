@@ -19,6 +19,7 @@ exports.add = ( request, response ) => {
         response.send(data)
 
     }).catch( e => {
+        console.log(e)
         response.status(500).send({
             message: 'An error occured while adding this list.'
         })
@@ -38,6 +39,7 @@ exports.find_by_id = ( request, response ) => {
         else response.send(data)
 
     }).catch( e => {
+        console.log(e)
         response.status(500).send({
             message: 'An error occurred while retrieving this list.'
         })
@@ -53,27 +55,22 @@ exports.find_by_id_and_update = ( request, response ) => {
 
     const id = request.params.id
 
-    const request_name = request.body.name
-    const request_description = request.body.descriptions
-    const request_order = request.body.order
+    let request_body = {}
+    if ( request.body.name ) request_body.name = request.body.name
+    if ( request.body.description ) request_body.description = request.body.description
+    if ( request.body.order ) request_body.order = request.body.order
+    request_body.updated = Date.now()
 
-    const request_body = {
-        name: request_name,
-        description: request_description,
-        order: request_order
-    }
-
-    List.findByIdAndUpdate( id, request_body, { useFindAndModify: false } ).then( data => {
+    List.findByIdAndUpdate( id, { $set: request_body }, { useFindAndModify: false, new: true } ).then( data => {
 
         if ( !data ) response.status(404).send({
             message: 'An error occurred attempting to update provided list.'
         })
 
-        else response.send({
-            message: 'The list was successfully updated.'
-        })
+        else response.send(data)
         
     }).catch( e => {
+        console.log(e)
         response.status(500).send({
             message: 'There was a problem retrieving the list.'
         })
@@ -95,6 +92,7 @@ exports.find_by_id_and_delete = ( request, response ) => {
         })
 
     }).catch( e => {
+        console.log(e)
         response.status(500).send({
             message: 'There was a problem deleting the list.'
         })
@@ -104,12 +102,13 @@ exports.find_by_id_and_delete = ( request, response ) => {
 exports.find_by_board = ( request, response ) => {
 
     const request_board_id = request.params.board_id
+    const request_user_id = request.params.user_id
 
-    if ( !request_board_id ) response.status(404).send({
+    if ( !request_board_id || !request_user_id ) response.status(404).send({
         message: 'The requested board could not be found.'
     })
 
-    List.find( { board_id: request_board_id } ).then( data => {
+    List.find( { board_id: request_board_id, user_id: request_user_id } ).then( data => {
 
         if ( !data ) response.status(404).send({
             message: 'No lists exist within the selected board.'
@@ -118,9 +117,35 @@ exports.find_by_board = ( request, response ) => {
         else response.send(data)
         
     }).catch( e => {
+        console.log(e)
         response.status(500).send({
             message: 'There was a problem finding the lists.'
         })
     })
 
 }
+
+// exports.find_by_user = ( request, response ) => {
+
+//     const request_user_id = request.params.user_id
+
+//     if ( !request_user_id ) response.status(404).send({
+//         message: 'The requested list could not be found.'
+//     })
+
+//     List.find( { user_id: request_user_id } ).then( data => {
+
+//         if ( !data ) response.status(404).send({
+//             message: 'No lists exist for the selected user.'
+//         })
+
+//         else response.send(data)
+        
+//     }).catch( e => {
+//         console.log(e)
+//         response.status(500).send({
+//             message: 'There was a problem finding the lists.'
+//         })
+//     })
+
+// }

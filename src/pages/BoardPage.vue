@@ -2,7 +2,7 @@
 
 <q-page class="q-px-md q-py-lg">
      
-    <Board :id="id" :name="name" />
+    <!-- <Board :id="id" :name="name" /> -->
 
 </q-page>
 
@@ -11,15 +11,25 @@
 <script>
 
 import { defineComponent } from 'vue'
+import { useStore } from 'vuex'
 
-import Board from './../components/Board'
+// import Board from './../components/Board'
 
 export default defineComponent({
 
     name: 'BoardsPage',
 
-    components: {
-        Board,
+    // components: {
+    //     Board,
+    // },
+
+    setup () {
+
+        const store = useStore()
+
+        let lists = ref( [] )
+
+
     },
 
     data: function () {
