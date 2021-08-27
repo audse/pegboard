@@ -12,10 +12,9 @@
         </template>
         <template #content>
             {{ board.description }}
-            {{ board._id }}
         </template>
         <template #actions>
-            <!-- <q-btn flat :label="'Go to '+board.name" :to="'/board/'+urlify(board.name, board.id)" /> -->
+            <q-btn flat :label="'Go to '+board.name" :to="'/board/'+urlify(board.name, board.id)" />
         </template>
     </Sheet>
 
@@ -55,7 +54,7 @@ export default defineComponent({
 
         const store = useStore()
 
-        const board = computed( () => props.board_id ? store.state.board.boards.find( board => board._id === props.board_id ) : null )
+        const board = computed( () => props.board_id ? store.getters['board/find_by_id'](props.board_id) : null )
 
         const show_modal = ref(false)
 

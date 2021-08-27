@@ -9,6 +9,14 @@ export default {
         boards: []
     },
 
+    getters: {
+
+        find_by_id: state => (board_id) => {
+            return state.boards.find( board => board._id === board_id )
+        }
+
+    },
+
     mutations: {
 
         save ( state, data ) {

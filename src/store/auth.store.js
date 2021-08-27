@@ -15,6 +15,15 @@ export default {
         current_user: null,
     },
 
+    getters: {
+
+        user_id: state => {
+            if ( state.current_user ) return state.current_user.uid
+            else return null
+        }
+
+    },
+
     mutations: {
 
         set_auth ( state, data ) {

@@ -43,7 +43,7 @@ export default defineComponent({
 
         const store = useStore()
 
-        const board = computed( () => props.board_id ? store.state.board.boards.find( board => board._id === props.board_id ) : null )
+        const board = computed( () => props.board_id ? store.getters['board/find_by_id'](props.board_id) : null )
 
         const error = ref(null)
 

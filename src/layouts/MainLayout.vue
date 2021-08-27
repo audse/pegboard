@@ -20,7 +20,7 @@
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" show-if-above class="bg-secondary text-accent border-top-info">
-        <Sidebar :user="user" :email="email" :open="leftDrawerOpen" />
+        <Sidebar :open="leftDrawerOpen" />
     </q-drawer>
 
     <q-page-container>
@@ -58,11 +58,6 @@ export default defineComponent({
 
     setup () {
         const leftDrawerOpen = ref(false)
-        const $q = useQuasar()
-
-        const store = useStore()
-        const user_display_name = store.state.auth.current_user.displayName
-        const user_email = store.state.auth.current_user.email
 
         return {
             leftDrawerOpen,

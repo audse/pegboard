@@ -44,7 +44,9 @@ export default defineComponent({
         })
 
         const add_board = async () => {
-            form.user_id = store.state.auth.current_user ? store.state.auth.current_user.uid : null
+            
+            form.user_id = store.getters['auth/user_id']
+
             if ( form.user_id ) store.dispatch('board/add', form).then( result => {
                 q.notify( { color: 'primary', message: 'Added Board' } )
             })

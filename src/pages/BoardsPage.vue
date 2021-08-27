@@ -22,14 +22,12 @@
 
 // Setup
 import { defineComponent, onMounted, computed, ref } from 'vue'
-
 import { useStore } from 'vuex'
 
 // Components
 import BoardForm from './../components/Nested/Forms/Board.form'
 import BoardSheet from './../components/Nested/Sheets/Board.sheet'
 
-// Logic
 export default defineComponent({
 
     name: 'BoardsPage',
@@ -45,8 +43,7 @@ export default defineComponent({
 
         const store = useStore()
         
-        const user = store.state.auth.current_user
-        const user_id = user ? user.uid : null
+        const user_id = store.getters['auth/user_id']
 
         const boards = ref( store.state.board.boards )
 
@@ -56,7 +53,10 @@ export default defineComponent({
         })
 
         const get_boards = async () => {
-            if ( user_id ) boards.value = await store.dispatch('board/reload', user_id)
+            if ( user_id ) store.dispatch('board/reload', user_id).then( results => {
+                if ( results && results.length > 0 ) boards.value = results
+                else boards.value = []
+            })
             else boards.value = []
         }
 
