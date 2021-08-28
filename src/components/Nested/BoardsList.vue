@@ -5,7 +5,7 @@
     <q-item clickable to="/boards/" class="text-accent" active-class="bg-primary">
         <Heading h6 title="Your Boards" padding="q-pt-sm" />
     </q-item>
-    <q-item v-for="board in boards" :key="`board-list-${board._id}`" clickable :to="`/board/${urlify(board.name, board._id)}`" class="text-accent"  active-class="bg-primary">
+    <q-item v-for="board in boards" :key="`board-list-${board._id}`" clickable :to="{ name: 'board_page', params: { id: board._id, name: board.name } }" class="text-accent"  active-class="bg-primary">
         <q-item-label class="q-pt-sm">{{ board.name }}</q-item-label>
     </q-item>
     <q-item v-if="!boards_exist" class="col text-accent">
@@ -17,7 +17,7 @@
 <script>
 
 // Setup
-import { defineComponent, computed, ref } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default defineComponent({
@@ -28,27 +28,27 @@ export default defineComponent({
 
         const store = useStore()
 
-        const boards = ref( store.state.board.boards )
-
-        const boards_exist = computed( () => {
-            if ( boards.value.length > 0 ) return true
-            else return false
-        })
+        const boards = computed( () => store.state.board.boards )
+        const boards_exist = computed( () => boards.value[0] )
 
         return {
-            store,
             boards,
             boards_exist
         }
 
     },
 
+    watch: {
+
+        store: function () {
+            console.log('update')
+        }
+    },
+
     methods: {
 
-        urlify: function (string, id=null) {
-            let url = string.replace(/\W+/g, '-').toLowerCase()
-            if ( id ) url += '/'+id
-            return url
+        urlify: function (string) {
+            return string.replace(/\W+/g, '-').toLowerCase()
         },
 
     },

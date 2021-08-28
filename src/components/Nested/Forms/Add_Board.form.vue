@@ -20,8 +20,8 @@
 <script>
 
 import { defineComponent, ref, reactive } from 'vue'
-import { useStore } from 'vuex'
-import { useQuasar } from 'quasar'
+
+import { use_board } from './../Use/board.use'
 
 export default defineComponent({
 
@@ -31,31 +31,18 @@ export default defineComponent({
         show_form: Boolean,
     },
 
-    setup () {
+    setup ( props, { emit } ) {
 
-        const store = useStore()
-        const q = useQuasar()
-
-        const error = ref(null)
-
-        const form = reactive( {
-            name: null,
-            description: null,
-        })
-
-        const add_board = async () => {
-            
-            form.user_id = store.getters['auth/user_id']
-
-            if ( form.user_id ) store.dispatch('board/add', form).then( result => {
-                q.notify( { color: 'primary', message: 'Added Board' } )
-            })
-        }
-
-        return {
-            error,
+        const {
             form,
-            add_board
+            error,
+            add_board,
+        } = use_board(null, emit)
+        
+        return {
+            form,
+            error,
+            add_board,
         }
         
     },

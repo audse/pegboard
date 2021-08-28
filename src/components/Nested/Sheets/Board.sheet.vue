@@ -18,7 +18,7 @@
         </template>
     </Sheet>
 
-    <BoardModal :board_id="board_id" :show_modal="show_modal" @hide="show_modal=false" />
+    <EditBoardModal :board_id="board_id" :show_modal="show_modal" @hide="show_modal=false" />
 
 </div>
 
@@ -30,7 +30,7 @@
 import { defineComponent, computed, ref } from 'vue'
 import { useStore } from 'vuex'
 
-import BoardModal from './../Modals/Board.modal'
+import EditBoardModal from './../Modals/Edit_Board.modal'
 
 export default defineComponent({
 
@@ -47,7 +47,7 @@ export default defineComponent({
     },
 
     components: {
-        BoardModal,
+        EditBoardModal,
     },
 
     setup ( props ) {

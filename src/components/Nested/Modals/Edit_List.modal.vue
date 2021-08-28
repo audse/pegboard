@@ -28,7 +28,7 @@ import { useStore } from 'vuex'
 
 export default defineComponent({
     
-    name: 'ListModal',
+    name: 'EditListModal',
 
     props: {
         list_id: String,
@@ -60,7 +60,7 @@ export default defineComponent({
         }
 
         const find_by_id_and_delete = async () => {
-            store.dispatch('list/find_by_id_and_delete', props.list_id ).then( result => {
+            store.dispatch('list/find_by_id_and_delete', { list_id: props.list_id, board_id: props.board_id } ).then( result => {
                 emit('hide')
             })
         }

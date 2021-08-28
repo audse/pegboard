@@ -13,10 +13,10 @@
             </q-item-section>
         </q-item>
         <q-item>
-            <ListForm :board_id="board._id" classes="q-mb-md full-width" />
+            <AddListForm :board_id="board._id" classes="q-mb-md full-width" />
         </q-item>
 
-        <BoardModal :board_id="board._id" :show_modal="show_modal" @hide="show_modal=false"  />
+        <EditBoardModal :board_id="board._id" :show_modal="show_modal" @hide="show_modal=false"  />
 
     </div>
     <div v-if="lists_exist">
@@ -36,18 +36,18 @@ import { defineComponent, computed, watch, reactive, ref, onBeforeMount } from '
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 
-import BoardModal from './../components/Nested/Modals/Board.modal'
+import EditBoardModal from './../components/Nested/Modals/Edit_Board.modal'
 import ListSheet from './../components/Nested/Sheets/List.sheet'
-import ListForm from './../components/Nested/Forms/List.form'
+import AddListForm from './../components/Nested/Forms/Add_List.form'
 
 export default defineComponent({
 
     name: 'BoardPage',
 
     components: {
-        BoardModal,
+        EditBoardModal,
         ListSheet,
-        ListForm,
+        AddListForm,
     },
 
     setup () {
@@ -65,13 +65,7 @@ export default defineComponent({
 
         const board = computed( () => store.getters['board/find_by_id'](route_id.value) )
 
-        const lists = computed( {
-            get () {
-                return store.getters['list/find_by_board'](route_id.value)
-            }, set (value) {
-                console.log(value)
-            }
-        })
+        const lists = computed( () => store.getters['list/find_by_board'](route_id.value) )
 
         const board_exists = computed( () => board.value )
         const lists_exist = computed( () => lists.value && lists.value.length >= 1 )

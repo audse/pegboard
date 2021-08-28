@@ -14,7 +14,7 @@
 
     </Sheet>
 
-    <ListModal :list_id="list_id" :board_id="board_id" :show_modal="show_modal" @hide="show_modal=false" />
+    <EditListModal :list_id="list_id" :board_id="board_id" :show_modal="show_modal" @hide="show_modal=false" />
 
 </div>
 
@@ -24,7 +24,7 @@
 import { defineComponent, ref, computed } from 'vue'
 import { useStore } from 'vuex'
 
-import ListModal from './../Modals/List.modal'
+import EditListModal from './../Modals/Edit_List.modal'
 
 export default defineComponent({
 
@@ -36,7 +36,7 @@ export default defineComponent({
     },
 
     components: {
-        ListModal,
+        EditListModal,
     },
 
     setup( props ) {

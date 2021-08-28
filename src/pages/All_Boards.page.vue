@@ -4,7 +4,7 @@
 
 <Heading h2 title="Your Boards" padding="q-my-lg" />
 
-<BoardForm classes="q-mb-md" />
+<AddBoardForm classes="q-mb-md" />
 
 <!-- All Boards -->
 <div v-if="boards_exist">
@@ -25,7 +25,7 @@ import { defineComponent, onMounted, computed, ref } from 'vue'
 import { useStore } from 'vuex'
 
 // Components
-import BoardForm from './../components/Nested/Forms/Board.form'
+import AddBoardForm from './../components/Nested/Forms/Add_Board.form'
 import BoardSheet from './../components/Nested/Sheets/Board.sheet'
 
 export default defineComponent({
@@ -35,7 +35,7 @@ export default defineComponent({
     components: {
 
         // Components
-        BoardForm,
+        AddBoardForm,
         BoardSheet,
     },
 

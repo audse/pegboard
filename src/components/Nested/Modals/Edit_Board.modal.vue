@@ -25,12 +25,14 @@
 </template>
 <script>
 
-import { defineComponent, ref, computed } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
+
+import { use_board } from './../Use/board.use'
 
 export default defineComponent({
     
-    name: 'BoardModal',
+    name: 'EditBoardModal',
 
     props: {
         board_id: String,
@@ -42,36 +44,27 @@ export default defineComponent({
     setup ( props, { emit } ) {
 
         const store = useStore()
-
-        const board = computed( () => props.board_id ? store.getters['board/find_by_id'](props.board_id) : null )
-
-        const error = ref(null)
-
-        const form = ref({
-            name: board.value.name,
-            description: board.value.description
-        })
         
-        const find_by_id_and_update = async () => {
-            store.dispatch('board/find_by_id_and_update', { board_id: props.board_id, data: form }).then( result => {
-                emit('hide')
-            })
-        }
+        const current_board = computed( () => props.board_id ? store.getters['board/find_by_id'](props.board_id) : null )
 
-        const find_by_id_and_delete = async () => {
-            store.dispatch('board/find_by_id_and_delete', props.board_id ).then( result => {
-                emit('hide')
-            })
-        }
+        const {
+            board,
+            form,
+            error,
 
+            find_by_id_and_update,
+            find_by_id_and_delete,
+
+        } = use_board(current_board.value, emit)
+        
         return {
             board,
-            error,
             form,
-            find_by_id_and_update,
-            find_by_id_and_delete
-        }
+            error,
 
+            find_by_id_and_update,
+            find_by_id_and_delete,
+        }
 
     },
 

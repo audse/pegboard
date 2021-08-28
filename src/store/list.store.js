@@ -54,7 +54,12 @@ export default {
         },
 
         remove_by_id_and_save ( state, data ) {
-            //
+            if ( data.list_id ) {
+
+                let index =  state.lists[data.board_id].findIndex( list => list._id === data.list_id )
+                state.lists[data.board_id].splice(index, 1)
+
+            }
         },
     },
 
@@ -114,9 +119,16 @@ export default {
             }).catch( e => console.log(e) )
         },
 
-        async find_by_id_and_delete () {
+        async find_by_id_and_delete ( { commit }, data ) {
             return new Promise( (resolve, reject) => {
 
+                if ( data.list_id ) ListService.find_by_id_and_delete( data.list_id ).then( result => {
+
+                    commit('remove_by_id_and_save', data)
+                    resolve(result)
+                })
+
+                else reject()
             }).catch( e => console.log(e) )
         },
     }
