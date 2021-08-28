@@ -7,6 +7,7 @@ import createPersistedState from 'vuex-persistedstate'
 import auth from './auth.store'
 import board from './board.store'
 import list from './list.store'
+import card from './card.store'
 
 const auth_state = createPersistedState({
     paths: ['auth']
@@ -20,6 +21,10 @@ const list_state = createPersistedState({
     paths: ['list']
 })
 
+const card_state = createPersistedState({
+    paths: ['card']
+})
+
 export default store( () => {
 
     const Store = createStore({
@@ -28,12 +33,14 @@ export default store( () => {
             auth,
             board,
             list,
+            card,
         },
 
         plugins: [
             auth_state,
             board_state,
-            list_state
+            list_state,
+            card_state,
         ],
 
         // enable strict mode (adds overhead!)

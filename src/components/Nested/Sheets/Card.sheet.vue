@@ -3,20 +3,18 @@
 
 <div>
 
-    <Sheet :label="list.name" dense light handle subtitle>
+    <Sheet :label="card.name" dense light handle subtitle>
         <template #button>
             <q-btn @click="show_modal=true" icon="tune" color="primary" text-color="scale-accent-3" flat />
         </template>
-        <template #subtitle>{{ list.description }}</template>
+        <template #subtitle>{{ card.content }}</template>
         <template #content>
-
-            <Cards :list_id="list_id" :board_id="board_id" />
 
         </template>
 
     </Sheet>
 
-    <EditListModal :list_id="list_id" :board_id="board_id" :show_modal="show_modal" @hide="show_modal=false" />
+    <!-- <EditListModal :list_id="list_id" :board_id="board_id" :show_modal="show_modal" @hide="show_modal=false" /> -->
 
 </div>
 
@@ -26,33 +24,31 @@
 import { defineComponent, ref, computed } from 'vue'
 import { useStore } from 'vuex'
 
-import EditListModal from './../Modals/Edit_List.modal'
-import Cards from './../../Cards'
+// import EditListModal from './../Modals/Edit_List.modal'
 
 export default defineComponent({
 
     name: 'ListSheet',
 
     props: {
-        list_id: String,
+        card_id: String,
         board_id: String,
     },
 
-    components: {
-        EditListModal,
-        Cards
-    },
+    // components: {
+    //     EditListModal,
+    // },
 
     setup( props ) {
 
         const store = useStore()
 
-        const list = computed( () => props.list_id ? store.getters['list/find_by_id'](props.list_id, props.board_id) : null )
+        const card = computed( () => props.board_id ? store.getters['card/find_by_id'](props.card_id, props.board_id) : null )
         
         const show_modal = ref(false)
 
         return {
-            list,
+            card,
             show_modal
         }
     },
