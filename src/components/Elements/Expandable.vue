@@ -2,7 +2,7 @@
 <template>
     
 
-<q-card :class="[classes ? classes : 'bg-secondary', 'text-accent', 'q-mb-md', 'border-secondary']" flat :bordered="outline ? true : false">
+<q-card :class="[classes ? classes : '', light ? 'expandable-light' : 'expandable-dark']" flat>
 
     <!-- Header -->
     <q-card-actions @click="expand = !expand" class="cursor-pointer">
@@ -44,11 +44,11 @@ export default defineComponent({
         classes: String,
 
         open: Boolean, // defaults to closed
-        outline: Boolean, // defaults to no outline
 
         icon: String,
 
         disabled: Boolean,
+        light: Boolean,
     },
 
     data: function () {
@@ -63,3 +63,17 @@ export default defineComponent({
 })
 
 </script>
+
+<style lang="scss" scoped>
+
+.expandable-dark {
+    background: $secondary;
+    color: $accent;
+}
+
+.expandable-light {
+    background: $scale-accent-0;
+    color: $accent;
+}
+
+</style>

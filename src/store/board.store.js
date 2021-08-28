@@ -68,8 +68,6 @@ export default {
             return new Promise( (resolve, reject) => {
 
                 BoardService.find_by_id( board_id ).then( board => {
-                    console.log('store results', board)
-
                     if ( board ) commit('find_by_id_and_save', {
                         board_id: board_id,
                         board: board.data

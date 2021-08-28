@@ -1,7 +1,7 @@
 
 <template>
 
-<Expandable label="Add List">
+<Expandable label="Add List" light>
     <template #before-content>
         <Warning :error="error" />
     </template>

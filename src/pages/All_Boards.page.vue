@@ -2,9 +2,9 @@
 
 <q-page class="q-px-md q-py-lg">
 
-<Heading h2 title="Your Boards" />
+<Heading h2 title="Your Boards" padding="q-my-lg" />
 
-<BoardForm />
+<BoardForm classes="q-mb-md" />
 
 <!-- All Boards -->
 <div v-if="boards_exist">

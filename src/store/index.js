@@ -25,9 +25,9 @@ export default store( () => {
     const Store = createStore({
 
         modules: {
-            auth: auth,
-            board: board,
-            list: list,
+            auth,
+            board,
+            list,
         },
 
         plugins: [

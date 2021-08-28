@@ -4,17 +4,15 @@
 
     <div v-if="board_exists">
 
-        <ListForm :board_id="board._id" />
-
         <Heading h2 :title="board.name" :subtitle="board.description" padding="q-py-lg" />
+
+        <ListForm :board_id="board._id" classes="q-mb-md" />
 
     </div>
     <div v-if="lists_exist">
 
         <Drag v-model="lists" v-slot="element_props" col_list gutter_sm horizontal>
-            <Sheet :label="element_props.element.name" dense light handle subtitle>
-                <template #subtitle>{{ element_props.element.description }}</template>
-            </Sheet>
+            <ListSheet :list_id="element_props.element._id" :board_id="board._id" />
         </Drag>
 
     </div>
@@ -26,6 +24,7 @@
 
 import { defineComponent } from 'vue'
 
+import ListSheet from './../components/Nested/Sheets/List.sheet'
 import ListForm from './../components/Nested/Forms/List.form'
 
 export default defineComponent({
@@ -33,6 +32,7 @@ export default defineComponent({
     name: 'BoardPage',
 
     components: {
+        ListSheet,
         ListForm,
     },
 
@@ -53,8 +53,6 @@ export default defineComponent({
     },
 
     mounted () {
-
-        console.log('mounted', this.$router.currentRoute.value.params)
 
         this.route_id = this.$router.currentRoute.value.params.id
         this.route_name = this.$router.currentRoute.value.params.name
