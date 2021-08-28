@@ -10,7 +10,7 @@ exports.add = ( request, response ) => {
         board_id: request.body.board_id,
 
         name: request.body.name,
-        description: request.body.description,
+        description: request.body.description ? request.body.description : '',
 
     })
 

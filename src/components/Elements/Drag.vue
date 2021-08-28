@@ -1,6 +1,7 @@
 
 <template>
 
+<div :class="horizontal? 'fit scroll-y hide-scrollbar q-pa-sm' : ''">
 <draggable v-model="local_value" item-key="_id" v-bind="drag_options" @start="dragging=true" @end="dragging=false" :class="drag_class">
     <template #item="{ element, index }">
         <div class="col-xs-12 col-sm-6 col-lg-4">
@@ -11,6 +12,7 @@
         </div>
     </template>
 </draggable>
+</div>
 
 </template>
 <script>
@@ -29,7 +31,9 @@ export default defineComponent({
         group: String,
 
         col_4: Boolean,
+        col_list: Boolean,
         gutter_sm: Boolean,
+        horizontal: Boolean,
 
     },
     
@@ -50,13 +54,15 @@ export default defineComponent({
 
         const drag_class = computed( () => {
             let class_string = ''
-            if ( props.col_4 ) class_string += ' row'
+            if ( props.col_4 || props.col_list ) class_string += ' row'
             if ( props.gutter_sm ) class_string += ' q-col-gutter-sm'
+            if ( props.horizontal ) class_string += ' no-wrap'
             return class_string
         })
 
         const element_class = computed( () => {
             if ( props.col_4 ) return 'col-xs-12 col-sm-6 col-md-4'
+            if ( props.col_list ) return 'col-xs-11 col-sm-5 col-md-4 col-lg-3'
             else return ''
         })
 
@@ -112,3 +118,11 @@ export default defineComponent({
 })
 
 </script>
+
+<style scoped>
+
+.horizontal {
+
+}
+
+</style>

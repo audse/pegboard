@@ -14,7 +14,7 @@
             {{ board.description }}
         </template>
         <template #actions>
-            <q-btn flat :label="'Go to '+board.name" :to="'/board/'+urlify(board.name, board.id)" />
+            <q-btn flat :label="'Go to '+board.name" :to="{name: 'board_page', params: { id: board._id, name: urlify(board.name) } }" />
         </template>
     </Sheet>
 
@@ -67,10 +67,8 @@ export default defineComponent({
 
     methods: {
 
-        urlify: function (string, id=null) {
-            let url = string.replace(/\W+/g, '-').toLowerCase()
-            if ( id ) url += '/'+id
-            return url
+        urlify: function (string) {
+            return string.replace(/\W+/g, '-').toLowerCase()
         },
 
     },

@@ -38,6 +38,9 @@
                 <slot name="button"></slot>
             </q-item-section>
         </q-item>
+        <q-item v-if="subtitle" :class="[handle ? 'q-pl-lg q-ml-sm q-pt-none q-mt-none' : '', 'text-scale-accent-5']">
+            <slot name="subtitle"></slot>
+        </q-item>
     </q-card-actions>
 
     <!-- Content -->
@@ -77,6 +80,7 @@ export default defineComponent({
         label: String,
         classes: Object,
 
+        subtitle: Boolean,
         light: Boolean,
         small: Boolean,
         dense: Boolean,

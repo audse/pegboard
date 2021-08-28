@@ -2,9 +2,9 @@
 const routes = [
     {
         path: '/',
-        component: () => import('layouts/MainLayout.vue'),
+        component: () => import('layouts/Main.layout.vue'),
         children: [
-            { path: '/', component: () => import('src/pages/AuthPage.vue'), meta: {
+            { path: '/', component: () => import('pages/AuthPage.vue'), meta: {
                 requires_unauth: true,
                 breadcrumb: ( route ) => ([
                     { name: 'Sign In' },
@@ -27,25 +27,25 @@ const routes = [
                 }
             },
 
-            { path: '/themes', component: () => import('src/pages/ThemesPage.vue'), meta: {
+            { path: '/themes', component: () => import('pages/ThemesPage.vue'), meta: {
                     requires_auth: true,
-                    breadcrumb: ( route) => ([
+                    breadcrumb: ( route ) => ([
                         { name: 'home', path: '/home' },
                         { name: 'themes', },
                     ]),
                 }
             },
 
-            { path: '/boards', component: () => import('pages/BoardsPage.vue'), meta: { 
+            { name: 'all_boards_page', path: '/boards', component: () => import('pages/All_Boards.page.vue'), meta: { 
                     requires_auth: true, 
                     breadcrumb: ( route ) => ([
                         { name: 'home', path: '/home' },
                         { name: 'boards',},
-                    ]),
-                }
+                    ])
+                },
             },
 
-            { path: '/board/:name/:id', component: () => import('src/pages/BoardPage.vue'), meta: {
+            { name: 'board_page', path: '/boards/board/:id/:name', component: () => import('pages/Board.page.vue'), meta: {
                     requires_auth: true,
                     breadcrumb: ( route ) => ([
                         { name: 'home', path: '/home' },
@@ -53,7 +53,8 @@ const routes = [
                         { name: route.params.name }
                     ]),
                 }
-            },
+            }
+            
         ]
     },
 

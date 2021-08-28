@@ -63,14 +63,12 @@ export default {
 
         },
 
-        async find_by_id_and_reload ( { commit, state }, board_id ) {
+        async find_by_id_and_reload ( { commit }, board_id ) {
 
             return new Promise( (resolve, reject) => {
 
-                const state_boards = Object.assign( {}, state.boards )
-                const index = state_boards.findIndex( (board) => board._id === board_id )
-
-                if ( index ) BoardService.find_by_id( board_id ).then( board => {
+                BoardService.find_by_id( board_id ).then( board => {
+                    console.log('store results', board)
 
                     if ( board ) commit('find_by_id_and_save', {
                         board_id: board_id,

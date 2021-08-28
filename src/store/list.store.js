@@ -43,7 +43,7 @@ export default {
 
         add_and_save ( state, data ) {
             if ( data.board_id) {
-                
+
                 let new_data = [...state.lists[board_id]]
                 new_data.push(data)
 
@@ -64,8 +64,7 @@ export default {
             return new Promise( (resolve, reject) => {
 
                 if ( data.board_id && data.user_id ) ListService.find_by_board( data.board_id, data.user_id ).then( results => {
-
-                    if (lists) commit('find_by_board_and_save', {
+                    if (results) commit('find_by_board_and_save', {
                         board_id: data.board_id,
                         lists: results.data
                     })
@@ -77,7 +76,7 @@ export default {
             }).catch( e => console.log(e) )
         },
 
-        async add () {
+        async add ( { commit }, data ) {
 
             return new Promise( (resolve, reject) => {
 
@@ -85,9 +84,11 @@ export default {
                     if ( results ) commit('add_and_save', {
                         list: results.data
                     })
+
+                    resolve(results.data)
                 })
 
-                resolve(results.data)
+                reject()
 
             }).catch( e => console.log(e) )
         },
