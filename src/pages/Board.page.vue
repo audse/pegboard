@@ -4,15 +4,25 @@
 
     <div v-if="board_exists">
 
-        <Heading h2 :title="board.name" :subtitle="board.description" padding="q-py-lg" />
+        <q-item>
+            <q-item-section>
+            <Heading h2 :title="board.name" :subtitle="board.description" padding="q-py-lg" />
+            </q-item-section>
+            <q-item-section side>
+                <q-btn @click="show_modal=true" color="accent" flat label="Edit" />
+            </q-item-section>
+        </q-item>
+        <q-item>
+            <ListForm :board_id="board._id" classes="q-mb-md full-width" />
+        </q-item>
 
-        <ListForm :board_id="board._id" classes="q-mb-md" />
+        <BoardModal :board_id="board._id" :show_modal="show_modal" @hide="show_modal=false"  />
 
     </div>
     <div v-if="lists_exist">
 
-        <Drag v-model="lists" v-slot="element_props" col_list gutter_sm horizontal>
-            <ListSheet :list_id="element_props.element._id" :board_id="board._id" />
+        <Drag v-model="lists" v-slot="element_props" group="lists" col_list gutter_sm horizontal>
+            <ListSheet :list_id="element_props.element._id" :board_id="element_props.element.board_id" />
         </Drag>
 
     </div>
@@ -22,8 +32,11 @@
 </template>
 <script>
 
-import { defineComponent } from 'vue'
+import { defineComponent, computed, watch, reactive, ref, onBeforeMount } from 'vue'
+import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 
+import BoardModal from './../components/Nested/Modals/Board.modal'
 import ListSheet from './../components/Nested/Sheets/List.sheet'
 import ListForm from './../components/Nested/Forms/List.form'
 
@@ -32,98 +45,74 @@ export default defineComponent({
     name: 'BoardPage',
 
     components: {
+        BoardModal,
         ListSheet,
         ListForm,
     },
 
-    data () {
+    setup () {
+
+        const store = useStore()
+        const router = useRoute()
+
+        const route_id = ref(router.params.id)
+        const route_name = ref(router.params.name)
+
+        const get_routes = () => {
+            route_id.value = router.params.id
+            route_name.value = router.params.name
+        }
+
+        const board = computed( () => store.getters['board/find_by_id'](route_id.value) )
+
+        const lists = computed( {
+            get () {
+                return store.getters['list/find_by_board'](route_id.value)
+            }, set (value) {
+                console.log(value)
+            }
+        })
+
+        const board_exists = computed( () => board.value )
+        const lists_exist = computed( () => lists.value && lists.value.length >= 1 )
+
+        const load_data = async () => {
+            await load_board()
+            await load_lists()
+        }
+
+        const load_board = async () => {
+            store.dispatch('board/find_by_id_and_reload', route_id.value)
+        }
+
+        const load_lists = async () => {
+
+            let data = {
+                board_id: route_id.value,
+                user_id: store.getters['auth/user_id']
+            }
+
+            if ( route_id.value && data.user_id ) {
+                store.dispatch('list/find_by_board_and_reload', data)
+            }
+        }
+
+        const show_modal = ref(false)
+
+        onBeforeMount( load_data )
+        watch( router, get_routes )
+
         return {
-
-            route_id: this.$route.id,
-            route_name: this.$route.name,
-
-            board: {
-                _id: null,
-                name: null,
-                description: null,
-            },
-
-            lists: []
+            route_id,
+            route_name,
+            board,
+            lists,
+            board_exists,
+            lists_exist,
+            show_modal
         }
-    },
-
-    mounted () {
-
-        this.route_id = this.$router.currentRoute.value.params.id
-        this.route_name = this.$router.currentRoute.value.params.name
-
-        this.get_data ( this.route_id )
 
     },
-
-    computed: {
-
-        board_exists () {
-            return ( this.board && this.board._id )
-            
-        },
-
-        lists_exist () {
-            return ( this.lists && this.lists.length >= 1 )
-        }
-    },
-
-    methods: {
-
-        get_data ( route_id ) {
-            
-            this.get_board( route_id ).then( board => {
-                this.board = Object.assign( {}, board.data )
-
-                this.get_lists( route_id ).then( lists => {
-                    this.lists = [...lists]
-                })
-            })
-        },
-
-        get_board: function ( board_id ) {
-            
-            return new Promise( (resolve, reject) => {
-
-                this.$store.dispatch('board/find_by_id_and_reload', board_id).then( board => {
-                    resolve(board)
-
-                }).catch( e => {
-                    console.log(e)
-                    reject()
-                })
-            })
-        },
-
-        get_lists: function ( board_id ) {
-
-            return new Promise( (resolve, reject) => {
-
-                let data = {
-                    board_id: board_id,
-                    user_id: this.$store.getters['auth/user_id']
-                }
-
-                if ( board_id && data.user_id ) {
-                    
-                    this.$store.dispatch('list/find_by_board_and_reload', data).then( lists => {
-
-                        resolve(lists)
-
-                    }).catch( e => {
-                        console.log(e) 
-                        reject()
-                    })
-
-                } else reject()
-            })
-        }
-    }
 
 })
 

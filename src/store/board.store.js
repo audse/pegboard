@@ -24,10 +24,9 @@ export default {
         },
 
         find_by_id_and_save ( state, data ) {
-
-            const state_index = state.boards.findIndex( board => board._id === data.board_id )
-            if ( state_index !== null && state_index !== undefined ) state.boards.splice(state_index, 1, data.board)
-            
+            const state_index = state.boards.findIndex( board => board._id === data._id )
+            if ( state_index != -1 ) state.boards.splice(state_index, 1, data)
+            else state.boards.push(data)
         },
 
         add_and_save ( state, data ) {
@@ -68,12 +67,9 @@ export default {
             return new Promise( (resolve, reject) => {
 
                 BoardService.find_by_id( board_id ).then( board => {
-                    if ( board ) commit('find_by_id_and_save', {
-                        board_id: board_id,
-                        board: board.data
-                    })
+                    if ( board ) commit('find_by_id_and_save', board.data)
 
-                    resolve(board)
+                    resolve(board.data || null)
 
                 }).catch( e => reject(e) )
             })

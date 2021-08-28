@@ -16,7 +16,7 @@ export default {
         },
 
         find_by_board: state => (board_id) => {
-            //
+            return state.lists[board_id]
         }
 
     },

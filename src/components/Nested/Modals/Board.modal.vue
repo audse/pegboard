@@ -54,14 +54,12 @@ export default defineComponent({
         
         const find_by_id_and_update = async () => {
             store.dispatch('board/find_by_id_and_update', { board_id: props.board_id, data: form }).then( result => {
-                console.log(result)
                 emit('hide')
             })
         }
 
         const find_by_id_and_delete = async () => {
             store.dispatch('board/find_by_id_and_delete', props.board_id ).then( result => {
-                console.log(result)
                 emit('hide')
             })
         }
