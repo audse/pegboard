@@ -26,6 +26,8 @@
 import { defineComponent, ref, computed } from 'vue'
 import { useStore } from 'vuex'
 
+import { use_list } from './../Use/list.use'
+
 export default defineComponent({
     
     name: 'EditListModal',
@@ -45,34 +47,19 @@ export default defineComponent({
 
         const list = computed( () => props.list_id ? store.getters['list/find_by_id'](props.list_id, props.board_id) : null )
 
-        const error = ref(null)
-
-        const form = ref({
-            name: list.value.name,
-            description: list.value.description
-        })
-        
-        const find_by_id_and_update = async () => {
-            
-            store.dispatch('list/find_by_id_and_update', { list_id: props.list_id, data: form }).then( result => {
-                emit('hide')
-            })
-        }
-
-        const find_by_id_and_delete = async () => {
-            store.dispatch('list/find_by_id_and_delete', { list_id: props.list_id, board_id: props.board_id } ).then( result => {
-                emit('hide')
-            })
-        }
+        const {
+            form,
+            error,
+            find_by_id_and_update,
+            find_by_id_and_delete,
+        } = use_list ( emit, props.board_id, list.value )
 
         return {
-            list,
-            error,
             form,
+            error,
             find_by_id_and_update,
             find_by_id_and_delete
         }
-
 
     },
 

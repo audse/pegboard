@@ -19,9 +19,9 @@
 </template>
 <script>
 
-import { defineComponent, ref, reactive } from 'vue'
-import { useStore } from 'vuex'
-import { useQuasar } from 'quasar'
+import { defineComponent } from 'vue'
+
+import { use_list } from './../Use/list.use'
 
 export default defineComponent({
 
@@ -32,31 +32,17 @@ export default defineComponent({
         board_id: String,
     },
 
-    setup ( props ) {
+    setup ( props, { emit } ) {
 
-        const store = useStore()
-        const q = useQuasar()
-
-        const error = ref(null)
-
-        const form = reactive( {
-            name: null,
-            description: null,
-        })
-
-        const add_list = async () => {
-            
-            form.user_id = store.getters['auth/user_id']
-            form.board_id = props.board_id
-
-            if ( form.user_id && form.board_id ) store.dispatch('list/add', form).then( result => {
-                q.notify( { color: 'primary', message: 'Added List' } )
-            })
-        }
+        const {
+            form,
+            error,
+            add_list
+        } = use_list ( emit, props.board_id )
 
         return {
-            error,
             form,
+            error,
             add_list
         }
         

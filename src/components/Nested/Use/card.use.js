@@ -1,5 +1,5 @@
 
-import { defineComponent, onBeforeMount, computed, reactive , ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { useStore } from 'vuex'
 
 const use_card = ( emit, board_id, list_id, current_card ) => {

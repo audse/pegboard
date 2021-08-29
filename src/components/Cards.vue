@@ -1,3 +1,4 @@
+
 <template>
 
 <Drag v-model="cards" v-slot="element_props" group="cards" :delay="25">
@@ -5,18 +6,10 @@
 </Drag>
 
 <AddCardForm :board_id="board_id" :list_id="list_id" />
-<!-- 
-<TextInput v-model="form.name" label="Add Card" dense classes="q-ma-sm q-mt-lg">
-    <template #button>
-        <q-btn @click="add_card" label="Add" flat />
-    </template>
-</TextInput> -->
-
 
 </template>
 <script>
 
-import { useQuasar } from 'quasar'
 import { defineComponent, onBeforeMount, computed, reactive } from 'vue'
 import { useStore } from 'vuex'
 
