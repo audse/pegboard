@@ -86,7 +86,16 @@ exports.find_by_id_and_update = ( request, response ) => {
     let request_body = {}
 
     if ( request.body.name ) request_body.name = request.body.name
-    if ( request.body.colors ) request_body.colors = request.body.colors
+
+    if ( request.body.primary ) request_body.primary = request.body.primary
+    if ( request.body.secondary ) request_body.secondary = request.body.secondary
+    if ( request.body.text ) request_body.text = request.body.text
+    if ( request.body.emphasis ) request_body.emphasis = request.body.emphasis
+    if ( request.body.warning ) request_body.warning = request.body.warning
+    if ( request.body.negative ) request_body.negative = request.body.negative
+    if ( request.body.scale_text ) request_body.scale_text = request.body.scale_text
+    if ( request.body.scale_secondary ) request_body.scale_secondary = request.body.scale_secondary
+
     if ( request.body.order ) request_body.order = request.body.order
 
     request_body.updated = Date.now()

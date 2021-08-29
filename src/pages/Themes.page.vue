@@ -6,6 +6,17 @@
 
 <AddThemeForm />
 
+<div v-if="themes_exist" class="q-pt-lg">
+    
+    <Drag v-model="themes" v-slot="element_props" gutter_sm col_4>
+        <div>
+        <ThemeSheet show_form :label="element_props.element.name" 
+        :colors="element_props.element" />
+        </div>
+    </Drag>
+
+</div>
+
 </q-page>
 
 </template>
@@ -16,6 +27,7 @@ import { defineComponent, onMounted, computed, ref } from 'vue'
 import { useStore } from 'vuex'
 
 import AddThemeForm from './../components/Nested/Forms/Add_Theme.form'
+import ThemeSheet from './../components/Nested/Sheets/Theme.sheet'
 
 export default defineComponent({
 
@@ -23,6 +35,7 @@ export default defineComponent({
 
     components: {
         AddThemeForm,
+        ThemeSheet
     },
 
     setup () {
@@ -31,23 +44,23 @@ export default defineComponent({
         
         const user_id = store.getters['auth/user_id']
 
-        // const themes = ref( store.state.theme.themes )
+        const themes = computed( () => store.state.theme.themes )
 
-        // const themes_exist = computed( () => {
-        //     if ( themes.value.length > 0 ) return true
-        //     else return false
-        // })
+        const themes_exist = computed( () => {
+            if ( themes.value.length > 0 ) return true
+            else return false
+        })
 
-        // const load_themes = async () => {
-        //     store.dispatch('theme/reload', user_id)
-        // }
+        const load_themes = async () => {
+            store.dispatch('theme/reload', user_id)
+        }
 
-        // onMounted (load_themes)
+        onMounted (load_themes)
 
         return {
             user_id,
-            // themes,
-            // themes_exist
+            themes,
+            themes_exist
         }
 
     },

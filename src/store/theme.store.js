@@ -98,11 +98,9 @@ export default {
         async find_by_id_and_update ( { commit }, data ) {
 
             return new Promise ( (resolve, reject) => {
-
-                if ( data.theme_id && data.data ) ThemeService.find_by_id_and_update( data.theme_id, data.data ).then( results => {
-                    
+                if ( data._id ) ThemeService.find_by_id_and_update( data._id, data ).then( results => {
                     if ( results ) commit('find_by_id_and_save', results.data)
-                    resolve(results)
+                    resolve(results.data)
                     
                 }).catch( e => reject(e) )
             })

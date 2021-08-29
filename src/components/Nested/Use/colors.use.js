@@ -3,9 +3,9 @@ import { ref, reactive, computed } from 'vue'
 import chroma from 'chroma-js'
 import { colors } from 'quasar'
 
-const use_color_form = () => {
+const use_color_form = ( current_theme ) => {
 
-    const form = reactive({
+    const form = current_theme ? reactive(current_theme) : reactive({
         name: null,
         primary: '#333333', // main ui background color
         text: '#fefefe', // text color
@@ -18,9 +18,10 @@ const use_color_form = () => {
     const advanced = ref(false)
 
     const options_picker = {
-        class: 'q-mt-sm full-width',
+        class: 'q-mt-sm full-width no-border',
         defaultView: 'palette',
         flat: true,
+        bordered: false,
 
         palette: [
             '#3f1a25','#362420','#312e23','#2a3a2a','#1e4d3b','#223f53','#273056','#2f2a50','#3a2a4e','#401f3e', // Deep Rainbow

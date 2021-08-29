@@ -15,6 +15,7 @@ const use_theme = ( current_theme, emit ) => {
     const q = useQuasar()
 
     const error = ref(null)
+    const saved = ref(false)
 
     // Methods
     const add_theme = async (form) => {
@@ -24,16 +25,15 @@ const use_theme = ( current_theme, emit ) => {
         form.scale_secondary = auto_scale(form.primary, form.secondary)
         form.scale_text = auto_scale(form.primary, form.text)
 
-        // console.log(form)
         if ( form.user_id ) store.dispatch('theme/add', form).then( result => {
-            console.log(result.data)
             q.notify({ color: 'primary', message: 'Theme Added!' })
         })
     }
 
     const find_by_id_and_update = async (form) => {
-        if ( current_theme ) store.dispatch('theme/find_by_id_and_update', { theme_id: current_theme._id, data: form }).then( result => {
+        if ( current_theme ) store.dispatch('theme/find_by_id_and_update', form).then( result => {
             q.notify( { color: 'primary', message: 'Theme Updated.' })
+            saved.value = true
             emit('hide')
         })
     }
@@ -47,6 +47,7 @@ const use_theme = ( current_theme, emit ) => {
 
     return {
         error,
+        saved,
 
         add_theme,
         find_by_id_and_update,
