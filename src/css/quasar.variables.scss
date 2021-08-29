@@ -23,6 +23,8 @@ $negative  : #C10015;
 $info      : #69b1ff;
 $warning   : #F2C037;
 
+$text: $accent;
+$emphasis: $info;
 
 @import './colors.scss';
 @import './theme.scss'

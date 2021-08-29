@@ -25,9 +25,10 @@ app.use(cors(corsOptions))
 
 // Backend Routing
 
-require('./server/routes/board.routes.js')(app);
-require('./server/routes/list.routes.js')(app);
-require('./server/routes/card.routes.js')(app);
+require('./server/routes/board.routes.js')(app)
+require('./server/routes/list.routes.js')(app)
+require('./server/routes/card.routes.js')(app)
+require('./server/routes/theme.routes.js')(app)
 
 
 const { createProxyMiddleware } = require('http-proxy-middleware')

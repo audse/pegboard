@@ -2,7 +2,9 @@
 <template>
 
 <div class="q-py-lg q-px-md q-mt-ms q-mb-lg">
-    <div class="text-h4">{{ current_user.displayName }}</div>
+    <div class="text-h4">
+        {{ current_user.displayName || 'Pegboard' }}
+    </div>
     <div class="text-subtitle-1 text-info">{{ current_user.email }}</div>
 </div>
 
@@ -26,7 +28,7 @@ import { useStore } from 'vuex'
 
 import firebase from 'firebase'
 
-import BoardsList from './Nested/BoardsList'
+import BoardsList from './../components/Nested/BoardsList'
 
 export default defineComponent({
 

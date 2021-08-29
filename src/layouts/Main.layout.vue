@@ -38,7 +38,7 @@ import { defineComponent, ref } from 'vue'
 import { colors, getCssVar } from 'quasar'
 import { useStore } from 'vuex'
 
-import Sidebar from 'src/components/Sidebar.vue'
+import Sidebar from './Sidebar.vue'
 
 export default defineComponent({
     name: 'MainLayout',

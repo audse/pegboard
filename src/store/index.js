@@ -8,6 +8,7 @@ import auth from './auth.store'
 import board from './board.store'
 import list from './list.store'
 import card from './card.store'
+import theme from './theme.store'
 
 const auth_state = createPersistedState({
     paths: ['auth']
@@ -25,6 +26,10 @@ const card_state = createPersistedState({
     paths: ['card']
 })
 
+const theme_state = createPersistedState({
+    paths: ['theme']
+})
+
 export default store( () => {
 
     const Store = createStore({
@@ -34,6 +39,7 @@ export default store( () => {
             board,
             list,
             card,
+            theme,
         },
 
         plugins: [
@@ -41,6 +47,7 @@ export default store( () => {
             board_state,
             list_state,
             card_state,
+            theme_state,
         ],
 
         // enable strict mode (adds overhead!)

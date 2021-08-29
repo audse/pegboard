@@ -12,5 +12,6 @@ db.url = db_config.db_url
 db.board_model = require('./board.model')(mongoose)
 db.list_model = require('./list.model')(mongoose)
 db.card_model = require('./card.model')(mongoose)
+db.theme_model = require('./theme.model')(mongoose)
 
 module.exports = db

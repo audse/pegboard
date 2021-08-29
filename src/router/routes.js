@@ -7,7 +7,8 @@ const routes = [
             { path: '/', component: () => import('pages/AuthPage.vue'), meta: {
                 requires_unauth: true,
                 breadcrumb: ( route ) => ([
-                    { name: 'Sign In' },
+                    { name: 'home', path: '/home' },
+                    { name: 'sign-in' },
                 ])
             } },
 
@@ -27,7 +28,7 @@ const routes = [
                 }
             },
 
-            { path: '/themes', component: () => import('pages/ThemesPage.vue'), meta: {
+            { name: 'themes_page', path: '/themes', component: () => import('pages/Themes.page.vue'), meta: {
                     requires_auth: true,
                     breadcrumb: ( route ) => ([
                         { name: 'home', path: '/home' },
