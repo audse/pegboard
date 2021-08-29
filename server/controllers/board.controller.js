@@ -79,6 +79,7 @@ exports.find_by_id_and_update = ( request, response ) => {
 
     if ( request.body.name ) request_body.name = request.body.name
     if ( request.body.description ) request_body.description = request.body.description
+    if ( request.body.theme_id ) request_body.theme_id = request.body.theme_id
     if ( request.body.order ) request_body.order = request.body.order
 
     request_body.updated = Date.now()

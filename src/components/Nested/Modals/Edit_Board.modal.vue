@@ -12,7 +12,11 @@
         <TextInput v-model="form.name" label="Board Name" />
         <TextInput v-model="form.description" label="Description" />
 
-        <Heading small title="Theme" />
+        <Expandable label="Themes" classes="q-pa-sm q-my-sm" dense>
+            <template #content>
+                <ThemeSelector v-model="form.theme_id" />
+            </template>
+        </Expandable>
 
     </template>
     <template #actions>
@@ -30,6 +34,8 @@ import { useStore } from 'vuex'
 
 import { use_board } from './../Use/board.use'
 
+import ThemeSelector from './../ThemeSelector'
+
 export default defineComponent({
     
     name: 'EditBoardModal',
@@ -37,6 +43,10 @@ export default defineComponent({
     props: {
         board_id: String,
         show_modal: Boolean,
+    },
+
+    components: {
+        ThemeSelector,
     },
 
     emits: ['hide'],

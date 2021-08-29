@@ -51,7 +51,7 @@ export default defineComponent({
 
         const local_value = computed( {
             get () { return props.modelValue },
-            set (value) {  emit('update:modelValue', this.value ) }
+            set (value) {  emit('update:modelValue', value ) }
         })
 
         const dragging = ref(false)

@@ -19,7 +19,7 @@
         <div v-show="expand && !disabled">
             <slot name="before-content"></slot>
 
-            <q-card-section class="q-mb-md">
+            <q-card-section :class="dense?'q-ma-none q-pa-none q-pt-md':'q-mb-md'">
                 <slot name="content"></slot>
             </q-card-section>
 

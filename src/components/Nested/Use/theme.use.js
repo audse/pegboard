@@ -1,7 +1,7 @@
 
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { useStore } from 'vuex'
-import { useQuasar } from 'quasar'
+import { useQuasar, setCssVar } from 'quasar'
 
 import { use_auto_color } from './../Use/colors.use'
 
@@ -45,13 +45,50 @@ const use_theme = ( current_theme, emit ) => {
         })
     }
 
+    const get_theme = (theme_id) => {
+
+        const theme = computed( () => store.getters['theme/find_by_id'](theme_id) )
+        if ( theme.value ) return theme.value
+        else store.dispatch('theme/find_by_id_and_reload').then( result => {
+            return theme.value
+        })
+
+    }
+
+    const change_theme = (theme) => {
+
+        const {
+            is_dark,
+        } = use_auto_color()
+
+        q.dark.set(is_dark(theme.primary))
+
+        setCssVar('primary', theme.primary)
+        setCssVar('secondary', theme.secondary)
+        setCssVar('text', theme.text)
+        setCssVar('emphasis', theme.emphasis)
+        setCssVar('warning', theme.warning)
+        setCssVar('negative', theme.negative)
+
+        // Color scales
+        for ( let i=0; i<0; i++ ) {
+            setCssVar( 'scale-secondary-'+i.toString(), theme.scale_secondary[i] )
+            setCssVar( 'scale-text-'+i.toString(), theme.scale_text[i] )
+
+        }
+
+    }
+
     return {
         error,
         saved,
 
         add_theme,
         find_by_id_and_update,
-        find_by_id_and_delete
+        find_by_id_and_delete,
+
+        get_theme,
+        change_theme
     }
 }
 

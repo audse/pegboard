@@ -32,9 +32,11 @@
 </template>
 <script>
 
-import { defineComponent, computed, watch, reactive, ref, onBeforeMount } from 'vue'
+import { defineComponent, computed, watch, onMounted, ref, onBeforeMount } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
+
+import { use_theme } from './../components/Nested/Use/theme.use'
 
 import EditBoardModal from './../components/Nested/Modals/Edit_Board.modal'
 import ListSheet from './../components/Nested/Sheets/List.sheet'
@@ -95,6 +97,16 @@ export default defineComponent({
 
         onBeforeMount( load_data )
         watch( router, get_routes )
+
+        const {
+            get_theme,
+            change_theme
+        } = use_theme()
+
+
+        watch( board, () => {
+            if (board_exists.value && board.value.theme_id) change_theme(get_theme(board.value.theme_id)) 
+        })
 
         return {
             route_id,

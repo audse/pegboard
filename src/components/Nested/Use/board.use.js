@@ -15,6 +15,7 @@ const use_board = ( current_board, emit ) => {
     const form = reactive( {
         name: board.name || null,
         description: board.description || null,
+        theme_id: board.theme_id || null,
     })
     const error = ref(null)
 

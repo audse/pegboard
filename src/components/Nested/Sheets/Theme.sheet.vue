@@ -174,7 +174,7 @@ export default defineComponent({
         const {
             form,
             advanced,
-        } = use_color_form(Object.assign({}, props.colors))
+        } = use_color_form( !props.example ? Object.assign({}, props.colors) : props.colors )
 
         const {
             saved,

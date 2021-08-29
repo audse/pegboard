@@ -17,7 +17,7 @@
 <script>
 
 // Setup
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 
 export default defineComponent({
@@ -30,6 +30,13 @@ export default defineComponent({
 
         const boards = computed( () => store.state.board.boards )
         const boards_exist = computed( () => boards.value[0] )
+        const user_id = computed( () => store.getters['auth/user_id'] )
+
+        const get_boards = async () => {
+            if ( !boards_exist.value && user_id.value ) store.dispatch('board/reload', user_id.value)
+        }
+
+        onMounted(get_boards)
 
         return {
             boards,

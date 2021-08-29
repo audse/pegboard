@@ -98,9 +98,7 @@ export default {
         async find_by_id_and_update ( { commit }, data ) {
 
             return new Promise ( (resolve, reject) => {
-
                 if ( data.board_id && data.data ) BoardService.find_by_id_and_update( data.board_id, data.data ).then( results => {
-                    
                     if ( results ) commit('find_by_id_and_save', results.data)
                     resolve(results)
                     
