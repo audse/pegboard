@@ -38,7 +38,7 @@
                 <slot name="button"></slot>
             </q-item-section>
         </q-item>
-        <q-item v-if="subtitle" :class="[handle ? 'q-pl-lg q-ml-sm q-pt-none q-mt-none' : '', 'text-scale-accent-5']">
+        <q-item v-if="subtitle" class="q-pa-none q-ma-none text-scale-accent-4" style="min-height: 36px;margin-left: 36px;">
             <slot name="subtitle"></slot>
         </q-item>
     </q-card-actions>

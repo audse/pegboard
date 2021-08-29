@@ -38,7 +38,6 @@ export default {
         },
 
         find_by_list_and_save ( state, data ) {
-            console.log(state.cards)
             if ( data.board_id && data.list_id && data.cards ) {
 
                 // Create a new array that contains only the cards that are not part of the not-yet-updated list.
@@ -59,20 +58,18 @@ export default {
         },
 
         add_and_save ( state, data ) {
+            
             if ( data.board_id) {
 
-                let new_data = [...state.cards[board_id]]
-                new_data.push(data)
-
-                state.cards = Object.assign( {}, state.cards, new_data )
+                if ( state.cards[data.board_id] ) state.cards[data.board_id].push(data)
 
             }
         },
 
         remove_by_id_and_save ( state, data ) {
-            if ( data.card_id ) {
+            if ( data._id ) {
 
-                let index =  state.cards[data.board_id].findIndex( card => card._id === data.card_id )
+                let index =  state.cards[data.board_id].findIndex( card => card._id === data._id )
                 state.cards[data.board_id].splice(index, 1)
 
             }
@@ -123,15 +120,14 @@ export default {
             return new Promise( (resolve, reject) => {
 
                 if ( data ) CardService.add( data ).then( results => {
-                    if ( results ) commit('add_and_save', {
-                        card: results.data
-                    })
+
+                    commit('add_and_save', results.data)
 
                     resolve(results.data)
 
                 }).catch( e => console.log(e) )
 
-                reject()
+                else reject()
 
             }).catch( e => console.log(e) )
         },
@@ -141,7 +137,7 @@ export default {
 
                 if ( data && data.card_id ) {
 
-                    CardService.find_by_id_and_update( data.card_id, data.data.value ).then( results => {
+                    CardService.find_by_id_and_update( data.card_id, data.data ).then( results => {
                         if ( results ) commit('find_by_id_and_save', {
                             board_id: results.data.board_id,
                             card: results.data
@@ -158,7 +154,7 @@ export default {
         async find_by_id_and_delete ( { commit }, data ) {
             return new Promise( (resolve, reject) => {
 
-                if ( data.card_id ) CardService.find_by_id_and_delete( data.card_id ).then( result => {
+                if ( data._id ) CardService.find_by_id_and_delete( data._id ).then( result => {
 
                     commit('remove_by_id_and_save', data)
                     resolve(result)

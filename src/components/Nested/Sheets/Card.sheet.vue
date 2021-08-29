@@ -3,7 +3,31 @@
 
 <div>
 
-    <Sheet :label="card.name" dense light handle subtitle>
+    <!-- Card Display -->
+    <q-item v-if="card.display==='card'" class="q-pl-none q-pr-sm">
+        <q-item-section class="q-px-none q-mx-none" side>
+            <q-icon class="handle" name="drag_indicator" color="scale-accent-1" />
+        </q-item-section>
+        <q-item-section>
+            <Sheet :label="card.name" noactions dense :nocontent="card.content?false:true">
+                <template #button>
+                    <q-btn @click="show_modal=true" icon="tune" color="primary" text-color="scale-accent-3" flat />
+                </template>
+                <template #content>{{ card.content }}</template>
+            </Sheet>
+        </q-item-section>
+    </q-item>
+
+    <!-- Heading Display -->
+    <q-item v-if="card.display==='heading'" class="q-py-md q-pl-xs q-pr-sm">
+        <Sheet :label="card.name" :classes="{ header: 'q-px-xs', label: 'text-h6' }" handle nocontent noactions>
+            <template #button>
+                <q-btn icon="tune" @click="setForms(card, element.id)" unelevated round text-color="scale-accent-0" />
+            </template>
+        </Sheet>
+    </q-item>
+
+    <!-- <Sheet :label="card.name" dense handle>
         <template #button>
             <q-btn @click="show_modal=true" icon="tune" color="primary" text-color="scale-accent-3" flat />
         </template>
@@ -12,9 +36,9 @@
 
         </template>
 
-    </Sheet>
+    </Sheet> -->
 
-    <!-- <EditListModal :list_id="list_id" :board_id="board_id" :show_modal="show_modal" @hide="show_modal=false" /> -->
+    <EditCardModal :list_id="list_id" :board_id="board_id" :card_id="card_id" :show_modal="show_modal" @hide="show_modal=false" />
 
 </div>
 
@@ -24,7 +48,7 @@
 import { defineComponent, ref, computed } from 'vue'
 import { useStore } from 'vuex'
 
-// import EditListModal from './../Modals/Edit_List.modal'
+import EditCardModal from './../Modals/Edit_Card.modal'
 
 export default defineComponent({
 
@@ -33,11 +57,12 @@ export default defineComponent({
     props: {
         card_id: String,
         board_id: String,
+        list_id: String,
     },
 
-    // components: {
-    //     EditListModal,
-    // },
+    components: {
+        EditCardModal,
+    },
 
     setup( props ) {
 

@@ -6,7 +6,7 @@
     <template #item="{ element, index }">
         <div class="col-xs-12 col-sm-6 col-lg-4">
             <transition appear @before-appear="stagger_start" @appear="stagger_start" @after-appear="stagger_end"
-            :style="{ transitionDelay: ( index * 50 ).toString() + 'ms !important',}">
+            :style="{ transitionDelay: ( index * transition_delay ).toString() + 'ms !important',}">
                 <slot :element="element" :index="index"></slot>
             </transition>
         </div>
@@ -35,6 +35,8 @@ export default defineComponent({
         gutter_sm: Boolean,
         horizontal: Boolean,
 
+        delay: Number,
+
     },
     
     emits: ['update:modelValue'],
@@ -44,6 +46,8 @@ export default defineComponent({
     },
 
     setup ( props, { emit } ) {
+
+        const transition_delay = computed( () => props.delay_amount || 50 )
 
         const local_value = computed( {
             get () { return props.modelValue },
@@ -94,6 +98,7 @@ export default defineComponent({
 
         return {
             local_value,
+            transition_delay,
             dragging,
             drag_class,
             element_class,
