@@ -7,6 +7,10 @@ const use_card = ( emit, board_id, list_id, current_card ) => {
     const store = useStore()
 
     const form = reactive( current_card ? Object.assign( {}, current_card ) : {} )
+    const options_display = [
+        { label: 'Card', value: 'card' },
+        { label: 'Header', value: 'header' },
+    ]
     const error = ref(null)
 
     const add_card = async () => {
@@ -31,6 +35,7 @@ const use_card = ( emit, board_id, list_id, current_card ) => {
 
     return {
         form,
+        options_display,
         error,
         add_card,
         find_by_id_and_update,

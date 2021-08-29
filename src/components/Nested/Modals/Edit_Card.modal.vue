@@ -10,7 +10,25 @@
     <template #content>
 
         <TextInput v-model="form.name" label="Card Name" />
-        <TextInput v-model="form.content" label="Content" />
+        <TextInput v-model="form.content" label="Content" type="textarea" />
+
+        <q-btn-toggle v-model="form.display" class="q-my-md" spread no-caps rounded unelevated toggle-color="info" toggle-text-color="primary" color="secondary" text-color="info" :options="options_display" />
+
+        <Expandable label="Date Options">
+            <template #addon>
+                <span class="text-info">{{ form.date_due ? form.date_due : form.date_todo ? form.date_todo : ''}}</span>
+            </template>
+            <template #content>
+                <div class="row q-col-gutter-sm">
+                    <div class="col-md-12 col-lg-6">
+                        <q-date v-model="form.date_due" type="date" :subtitle="form.date_due ? form.date_due : 'Not Picked'" title="Due Date" class="bg-primary full-width" color="secondary" flat />
+                    </div>
+                    <div class="col-md-12 col-lg-6">
+                        <q-date v-model="form.date_todo" type="date" :subtitle="form.date_todo ? form.date_todo : 'Not Picked'" title="To-Do Date" class="bg-primary full-width" color="secondary" flat range multiple />
+                    </div>
+                </div>
+            </template>
+        </Expandable>
 
     </template>
     <template #actions>
@@ -49,6 +67,7 @@ export default defineComponent({
 
         const {
             form,
+            options_display,
             error,
 
             find_by_id_and_update,
@@ -58,6 +77,7 @@ export default defineComponent({
         
         return {
             form,
+            options_display,
             error,
 
             find_by_id_and_update,

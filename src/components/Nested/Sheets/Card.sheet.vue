@@ -18,25 +18,14 @@
         </q-item-section>
     </q-item>
 
-    <!-- Heading Display -->
-    <q-item v-if="card.display==='heading'" class="q-py-md q-pl-xs q-pr-sm">
+    <!-- Header Display -->
+    <q-item v-if="card.display==='header'" class="q-py-md q-pl-xs q-pr-sm">
         <Sheet :label="card.name" :classes="{ header: 'q-px-xs', label: 'text-h6' }" handle nocontent noactions>
             <template #button>
-                <q-btn icon="tune" @click="setForms(card, element.id)" unelevated round text-color="scale-accent-0" />
+                <q-btn @click="show_modal=true" icon="tune" unelevated round text-color="scale-accent-0" />
             </template>
         </Sheet>
     </q-item>
-
-    <!-- <Sheet :label="card.name" dense handle>
-        <template #button>
-            <q-btn @click="show_modal=true" icon="tune" color="primary" text-color="scale-accent-3" flat />
-        </template>
-        <template #subtitle>{{ card.content }}</template>
-        <template #content>
-
-        </template>
-
-    </Sheet> -->
 
     <EditCardModal :list_id="list_id" :board_id="board_id" :card_id="card_id" :show_modal="show_modal" @hide="show_modal=false" />
 

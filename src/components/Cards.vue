@@ -49,35 +49,6 @@ export default defineComponent({
         }
 
         onBeforeMount( load_cards )
-        
-        // const q = useQuasar()
-
-        // const user_id = store.getters['auth/user_id']
-        // const cards = computed( () => store.getters['card/find_by_list'](props.board_id, props.list_id) )
-
-        // const load_cards = async () => {
-
-        //     let data = {
-        //         board_id: props.board_id,
-        //         list_id: props.list_id,
-        //         user_id: user_id,
-        //     }
-
-        //     if ( props.board_id && props.list_id && user_id ) {
-        //         store.dispatch('card/find_by_list_and_reload', data)
-        //     }
-        // }
-
-        // onBeforeMount( load_cards )
-        
-        // const form = reactive({})
-        // const add_card = async () => {
-
-        //     form.user_id = store.getters['auth/user_id']
-        //     form.board_id = props.board_id
-        //     form.list_id = props.list_id
-        //     store.dispatch('card/add', form)
-        // }
 
         return {
             cards,
