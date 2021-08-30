@@ -19,7 +19,7 @@ const routes = [
                     ]),
                 }
             },
-            { path: '/preferences', component: () => import('pages/PreferencesPage.vue'), meta: { 
+            { name: 'preferences_page', path: '/preferences', component: () => import('pages/Preferences.page.vue'), meta: { 
                     requires_auth: true, 
                     breadcrumb: ( route ) => ([
                         { name: 'home', path: '/home' },

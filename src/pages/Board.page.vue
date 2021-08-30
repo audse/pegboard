@@ -98,15 +98,13 @@ export default defineComponent({
         onBeforeMount( load_data )
         watch( router, get_routes )
 
-        const {
-            get_theme,
-            change_theme
-        } = use_theme()
+        // const {
+        //     get_and_set_current_theme
+        // } = use_theme()
 
+        // onBeforeMount(get_and_set_current_theme(board.value ? board.value : null))
 
-        watch( board, () => {
-            if (board_exists.value && board.value.theme_id) change_theme(get_theme(board.value.theme_id)) 
-        })
+        // watch( board.value, get_and_set_current_theme )
 
         return {
             route_id,

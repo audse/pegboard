@@ -111,7 +111,7 @@ export default defineComponent({
 }
 
 .lightsheet {
-    background: scale-color($primary-tint-0, $alpha: -70%) !important;
+    background: scale-color($primary, $alpha: -70%) !important;
     border-radius: 40px;
     padding: 20px 10px;
     margin-bottom: 20px;

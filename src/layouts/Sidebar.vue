@@ -9,14 +9,14 @@
 </div>
 
 <q-list class="q-mt-md">
-    <q-item clickable to="/themes/" class="text-accent" active-class="bg-primary"><span class="q-pt-sm">Themes Editor</span></q-item>
+    <q-item clickable to="/themes/" class="text-maintext" active-class="bg-primary"><span class="q-pt-sm">Themes Editor</span></q-item>
 </q-list>
 
 <BoardsList />
 
 <div class="fixed-bottom-left q-px-md q-py-lg">
     <q-btn flat color="info" label="Preferences" to="/preferences" />
-    <q-btn flat color="accent" label="sign out" @click="signOut()" />
+    <q-btn flat color="text" label="sign out" @click="signOut()" />
 </div>
 
 </template>

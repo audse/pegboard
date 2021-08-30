@@ -2,7 +2,7 @@
 <template>
     
 
-<q-card :class="style ? '' : [classes ? classes : '', light ? 'expandable-light' : 'expandable-dark']" :style="style ? style : {}" flat>
+<q-card :class="style ? '' : [classes ? classes : '', light ? 'bg-scale-text-0' : 'bg-scale-secondary-2']" :style="style ? style : {}" flat>
 
     <!-- Header -->
     <q-card-actions @click="expand = !expand" :class="['cursor-pointer', dense?'q-pa-none':'']">
@@ -69,16 +69,16 @@ export default defineComponent({
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 .expandable-dark {
     background: $secondary;
-    color: $accent;
+    color: $text;
 }
 
 .expandable-light {
-    background: $scale-accent-0;
-    color: $accent;
+    background: $scale-text-0;
+    color: $text;
 }
 
 </style>
