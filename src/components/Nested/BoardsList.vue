@@ -2,10 +2,10 @@
 <template>
     
 <q-list>
-    <q-item clickable to="/boards/" class="text-text" active-class="bg-primary">
+    <q-item clickable to="/boards/" class="text-text" active-class="bg-primary text-emphasis">
         <Heading h6 title="Your Boards" padding="q-pt-sm" />
     </q-item>
-    <q-item v-for="board in boards" :key="`board-list-${board._id}`" clickable :to="{ name: 'board_page', params: { id: board._id, name: board.name } }" class="text-text"  active-class="bg-primary">
+    <q-item v-for="board in boards" :key="`board-list-${board._id}`" clickable :to="{ name: 'board_page', params: { id: board._id, name: board.name } }" class="text-scale-text-6"  active-class="bg-primary text-emphasis">
         <q-item-label class="q-pt-sm">{{ board.name }}</q-item-label>
     </q-item>
     <q-item v-if="!boards_exist" class="col text-text">

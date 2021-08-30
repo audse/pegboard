@@ -5,7 +5,7 @@
     <template #header>
         Edit Board
         <q-space />
-        <q-btn @click="this.$emit('hide')" color="info" round flat dense icon="close" />
+        <q-btn @click="this.$emit('hide')" color="scale-text-3" round flat dense icon="close" />
     </template>
     <template #content>
 
@@ -20,9 +20,9 @@
 
     </template>
     <template #actions>
-        <q-btn label="Delete" @click="find_by_id_and_delete()" color="info" flat />
+        <q-btn label="Delete" @click="find_by_id_and_delete()" color="negative" flat />
         <q-space />
-        <q-btn label="Save" @click="find_by_id_and_update()" color="accent" flat />
+        <q-btn label="Save" @click="find_by_id_and_update()" color="emphasis" flat />
     </template>
 </Modal>
 

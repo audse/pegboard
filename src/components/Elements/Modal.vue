@@ -3,10 +3,10 @@
 
 <q-dialog :model-value="show">
 
-    <q-card class="bg-primary text-accent" :style=" {minWidth: '75vw', minHeight: menu ? '75vh' : '0px' }">
-        <q-card-actions class="text-h6 bg-secondary">
+    <q-card class="bg-primary text-text" :style=" {minWidth: '75vw', minHeight: menu ? '75vh' : '0px' }">
+        <q-card-actions class="text-h6 bg-scale-secondary-2">
 
-            <q-tabs v-model="tab" v-if="menu" class="text-info" active-color="accent">
+            <q-tabs v-model="tab" v-if="menu" class="text-text" active-color="emphasis">
                 <q-tab name="home" :label="tabLabel" />
                 <q-tab name="menu" :label="menuLabel ? menuLabel : 'More Options'" />
             </q-tabs>
@@ -32,7 +32,7 @@
         </q-card-section>
 
 
-        <q-card-actions class="bg-secondary absolute-bottom" >
+        <q-card-actions class="bg-primary absolute-bottom" >
             <slot name="actions"></slot>
         </q-card-actions>
     </q-card>

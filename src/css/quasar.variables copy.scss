@@ -12,42 +12,42 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary   : #312d47;
-$secondary : #141526;
-$accent    : #dddfed;
+$primary   : #1976D2;
+$secondary : darken($primary, 5);
+$accent    : lighten($primary, 40);
 
 $dark      : #1D1D1D;
 
 $positive  : #21BA45;
-$negative  : #53566a;
-$info      : #5191bf;
-$warning   : #f8961e;
+$negative  : #C10015;
+$info      : #69b1ff;
+$warning   : #F2C037;
 
-$text : #f0eee6;
-$emphasis    : #5191bf;
+$text : #fefefe;
+$emphasis    : #69b1ff;
 
 // @import './colors.scss';
 // @import './theme.scss'
 
-$scale-text-0: #423f58;
-$scale-text-1: #535168;
-$scale-text-2: #656279;
-$scale-text-3: #767489;
-$scale-text-4: #87869a;
-$scale-text-5: #9898ab;
-$scale-text-6: #a9aabb;
-$scale-text-7: #bbbbcc;
-$scale-text-8: #cccddc;
+$scale-text-0: #277ed5;
+$scale-text-1: #3486d8;
+$scale-text-2: #4f96dd;
+$scale-text-3: #6aa6e2;
+$scale-text-4: #84b6e7;
+$scale-text-5: #9fc6ed;
+$scale-text-6: #b9d6f2;
+$scale-text-7: #d4e6f7;
+$scale-text-8: #eef5fc;
 
-$scale-secondary-0: #2e2b44;
-$scale-secondary-1: #2b2840;
-$scale-secondary-2: #28263d;
-$scale-secondary-3: #25233a;
-$scale-secondary-4: #232137;
-$scale-secondary-5: #201f33;
-$scale-secondary-6: #1d1c30;
-$scale-secondary-7: #1a1a2d;
-$scale-secondary-8: #171729;
+$scale-secondary-0: #1973cd;
+$scale-secondary-1: #196fc7;
+$scale-secondary-2: #196fc7;
+$scale-secondary-3: #1961b1;
+$scale-secondary-4: #1859a5;
+$scale-secondary-5: #18529a;
+$scale-secondary-6: #184b8f;
+$scale-secondary-7: #184484;
+$scale-secondary-8: #173c78;
 
 .text-text {
     color: $text;

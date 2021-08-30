@@ -1,10 +1,9 @@
 <template>
 
-<q-page class="q-px-md q-py-lg">
-
-<Heading h2 title="Your Boards" padding="q-my-lg" />
+<q-page class="q-px-lg q-py-lg">
 
 <AddBoardForm classes="q-mb-md" />
+<!-- <Heading h2 title="Your Boards" padding="q-my-lg q-pt-lg" /> -->
 
 <!-- All Boards -->
 <div v-if="boards_exist">

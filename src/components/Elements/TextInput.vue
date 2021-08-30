@@ -4,7 +4,7 @@
 <div>
 
     <q-input v-if="!dark" v-model="newValue"
-        :type="type ? type : 'text'" :label="label" label-color="info" color="accent" :class="['q-pb-sm', classes]" input-class="text-accent" filled :dense="dense">
+        :type="type ? type : 'text'" :label="label" label-color="text" color="text" :class="['q-pb-sm', classes]" input-class="text-text" filled :dense="dense">
         <slot name="button"></slot>
         <template #append>
             <slot name="append"></slot>
@@ -12,7 +12,7 @@
     </q-input>
 
     <q-input v-if="dark" v-model="newValue"
-        :type="type ? type : 'text'" :label="darkLabel" label-color="info" color="info" :class="[classes]" borderless rounded bg-color="secondary" input-class="q-pl-md" :dense="dense">
+        :type="type ? type : 'text'" :label="darkLabel" label-color="text" color="text" :class="[classes]" borderless rounded bg-color="secondary" input-class="q-pl-md" :dense="dense">
         <slot name="button"></slot>
         <template #append>
             <slot name="append"></slot>

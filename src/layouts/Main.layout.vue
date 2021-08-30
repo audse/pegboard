@@ -2,9 +2,9 @@
 
 <q-layout view="lHh Lpr lFf" class="bg-primary text-text">
 
-    <q-header class="bg-secondary text-maintext">
+    <q-header class="bg-scale-secondary-3 text-text">
         <q-toolbar class="border-top-info">
-            <q-btn flat dense round icon="menu" color="info" aria-label="Menu" @click="toggleLeftDrawer" />
+            <q-btn flat dense round icon="menu" color="emphasis" aria-label="Menu" @click="toggleLeftDrawer" />
 
             <q-toolbar-title>
                 Pegboard
@@ -12,14 +12,14 @@
 
             <div class="text-text">{{ current_user.displayName }}</div>
         </q-toolbar>
-        <q-toolbar>
-            <q-breadcrumbs color="text" active-color="info">
+        <q-toolbar class="q-pl-">
+            <q-breadcrumbs color="scale-text-6" active-color="scale-text-4">
                  <q-breadcrumbs-el v-for="(crumb, index) in breadcrumbs" :key="'breadcrumb'+index" :label="crumb.name" :to="crumb.path" />
             </q-breadcrumbs>
         </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above class="bg-secondary text-text border-top-info">
+    <q-drawer v-model="leftDrawerOpen" show-if-above class="bg-scale-secondary-3 text-text border-top-info">
         <Sidebar :open="leftDrawerOpen" />
     </q-drawer>
 

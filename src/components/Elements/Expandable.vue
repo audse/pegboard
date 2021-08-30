@@ -2,11 +2,11 @@
 <template>
     
 
-<q-card :class="style ? '' : [classes ? classes : '', light ? 'bg-scale-text-0' : 'bg-scale-secondary-2']" :style="style ? style : {}" flat>
+<q-card :class="style ? '' : [classes ? classes : '', light ? 'bg-scale-text-0' : 'bg-scale-secondary-5']" :style="style ? style : {}" flat>
 
     <!-- Header -->
     <q-card-actions @click="expand = !expand" :class="['cursor-pointer', dense?'q-pa-none':'']">
-        <div v-if="label" class="text-smallheading">{{ label }}</div>
+        <div v-if="label" class="text-smallheading text-scale-text-8 q-pl-sm">{{ label }}</div>
         <slot name="label"></slot> <!-- Optional label slot if not using the shorthand label prop -->
         <q-space />
         <slot name="addon"></slot>

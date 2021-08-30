@@ -6,12 +6,12 @@
     <!-- Card Display -->
     <q-item v-if="card.display==='card'" class="q-pl-none q-pr-sm">
         <q-item-section class="q-px-none q-mx-none" side>
-            <q-icon class="handle" name="drag_indicator" color="scale-accent-1" />
+            <q-icon class="handle" name="drag_indicator" color="scale-text-0" />
         </q-item-section>
         <q-item-section>
-            <Sheet :label="card.name" noactions dense :nocontent="card.content?false:true">
+            <Sheet shadow :label="card.name" noactions dense :classes="{label:'q-pl-md text-smallheading text-scale-text-8', content:'q-pl-md text-scale-text-5'}" :nocontent="card.content?false:true">
                 <template #button>
-                    <q-btn @click="show_modal=true" icon="tune" color="primary" text-color="scale-accent-3" flat />
+                    <q-btn @click="show_modal=true" icon="tune" color="primary" text-color="scale-text-1" flat />
                 </template>
                 <template #content>{{ card.content }}</template>
             </Sheet>
@@ -20,9 +20,9 @@
 
     <!-- Header Display -->
     <q-item v-if="card.display==='header'" class="q-py-md q-pl-xs q-pr-sm">
-        <Sheet :label="card.name" :classes="{ header: 'q-px-xs', label: 'text-h6' }" handle nocontent noactions>
+        <Sheet shadow :label="card.name" :classes="{ header: 'q-px-xs', label: 'text-h6' }" handle nocontent noactions>
             <template #button>
-                <q-btn @click="show_modal=true" icon="tune" unelevated round text-color="scale-accent-0" />
+                <q-btn @click="show_modal=true" icon="tune" unelevated round text-color="scale-text-3" />
             </template>
         </Sheet>
     </q-item>

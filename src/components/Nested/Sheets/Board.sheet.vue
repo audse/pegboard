@@ -6,15 +6,15 @@
     Usually nested within a draggable element.
 -->
 <div :class="class_list.container">
-    <Sheet v-if="board" :label="board.name" :classes="{label:'text-h6', content:'text-info'}" separator :handle="handle">
+    <Sheet v-if="board" :label="board.name" :classes="{label:'text-h6 weight-semibold', content:'text-scale-text-5 q-pl-md'}" shadow separator :handle="handle">
         <template #button>
-            <q-btn @click="show_modal=true" color="primary-tint-25" round flat dense icon="tune" />
+            <q-btn @click="show_modal=true" color="emphasis" round flat icon="tune" />
         </template>
         <template #content>
             {{ board.description }}
         </template>
         <template #actions>
-            <q-btn flat :label="'Go to '+board.name" :to="{name: 'board_page', params: { id: board._id, name: urlify(board.name) } }" />
+            <q-btn flat color="emphasis" class="weight-bold" :label="'Go to '+board.name" :to="{name: 'board_page', params: { id: board._id, name: urlify(board.name) } }" />
         </template>
     </Sheet>
 

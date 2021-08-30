@@ -9,9 +9,9 @@
         </div>
     </div>
         
-    <div v-if="h2" class="text-h2 text-accent">
+    <div v-if="h2" class="text-h2 text-text weight-bold">
         {{ title }}
-        <div v-if="subtitle" class="text-h4 text-info">
+        <div v-if="subtitle" class="text-h4 text-info weight-semibold">
             {{ subtitle }}
         </div>
     </div>

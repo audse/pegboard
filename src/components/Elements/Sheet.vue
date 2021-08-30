@@ -4,7 +4,7 @@
 <q-card flat :class="[
     !small ? 'full-width' : '',
     shadow ? 'soft-shadow' : '',
-    light ? 'bg-primary' : 'bg-secondary',
+    light ? 'bg-primary' : 'bg-scale-secondary-7',
     'text-accent',
     classList.sheet ? classList.sheet : ''
     ]">
@@ -20,7 +20,7 @@
                 <q-icon name="drag_indicator" size="sm" :class="[
                 'handle', 
                 'q-mr-sm', 
-                classList.handle ? classList.handle : 'text-primary-tint-25', 
+                classList.handle ? classList.handle : 'text-scale-text-1', 
                 ]" />
             </q-item-section>
             <q-item-section  class="q-pa-none">
@@ -32,14 +32,14 @@
                     {{ label }}
                     <slot name="label"></slot>
                 </div>
+                <div v-if="subtitle" class="text-scale-text-4">
+                    <slot name="subtitle"></slot>
+                </div>
             </q-item-section>
             <q-space />
             <q-item-section class="q-pa-none" side>
                 <slot name="button"></slot>
             </q-item-section>
-        </q-item>
-        <q-item v-if="subtitle" class="q-pa-none q-ma-none text-scale-accent-4" style="min-height: 36px;margin-left: 36px;">
-            <slot name="subtitle"></slot>
         </q-item>
     </q-card-actions>
 
@@ -49,8 +49,8 @@
     </div>
 
     <q-card-section v-if="!nocontent" :class="[
-        !light ? 'bg-primary-shade-50' : '',
-        classList.content ? classList.content : 'text-info q-pa-sm'
+        !light ? 'bg-scale-secondary-5' : '',
+        classList.content ? classList.content : 'text-scale-accent-3 q-pa-sm'
         ]">
 
         <slot name="content"></slot>
@@ -58,7 +58,7 @@
 
     <!-- Actions -->
     <q-card-actions v-if="!noactions" :class="[
-        !light ? 'bg-primary-shade-50' : '',
+        !light ? 'bg-scale-secondary-5' : '',
         'actions',
         classList.actions ? classList.actions : ''
         ]">

@@ -1,4 +1,5 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700;800;900&display=swap');
 $firaSansPath: './Fonts/Fira_Sans/FiraSans';
 
 @font-face {
@@ -48,49 +49,61 @@ body {
     font-family: 'Fira Sans', sans-serif;
     font-size: 2rem;
     font-weight: 900;
-    line-height: 1.2;
+    line-height: 1.3;
 }
 
 .text-h2 {
     font-family: 'Fira Sans', sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 800;
-    line-height: 1.2;
+    line-height: 1.3;
 }
 
 .text-h3 {
     font-family: 'Fira Sans', sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.3;
 }
 
 .text-h4 {
     font-family: 'Fira Sans', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.3;
 }
 
 .text-h5 {
     font-family: 'Fira Sans', sans-serif;
     font-size: 1.2rem;
     font-weight: 600;
-    line-height: 1.2;
+    line-height: 1.3;
 }
 
 .text-h6 {
     font-family: 'Fira Sans', sans-serif;
     font-size: 1.1rem;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 1.3;
 }
 
 .text-smallheading {
     font-family: 'Fira Sans', sans-serif;
     font-size: 1rem;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 1.3;
+}
+
+.weight-light {
+    font-weight: 300;
+}
+
+.weight-regular {
+    font-weight: 400;
+}
+
+.weight-medium {
+    font-weight: 500;
 }
 
 .weight-semibold {

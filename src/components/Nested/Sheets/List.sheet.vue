@@ -5,7 +5,7 @@
 
     <Sheet :label="list.name" dense light handle subtitle>
         <template #button>
-            <q-btn @click="show_modal=true" icon="tune" color="primary" text-color="scale-accent-3" flat />
+            <q-btn @click="show_modal=true" icon="tune" color="primary" round text-color="scale-text-2" flat />
         </template>
         <template #subtitle>{{ list.description }}</template>
         <template #content>

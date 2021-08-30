@@ -1,7 +1,7 @@
 
 <template>
 
-<Expandable label="Add Board">
+<Expandable label="Add Board" icon="add">
     <template #before-content>
         <Warning :error="error" />
     </template>
@@ -12,7 +12,7 @@
 
     </template>
     <template #actions>
-        <q-btn flat color="accent" label="Add" @click="add_board" />
+        <q-btn flat color="emphasis" label="Add" @click="add_board" />
     </template>
 </Expandable>
 
