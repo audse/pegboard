@@ -21,7 +21,7 @@
 
 import { defineComponent } from 'vue'
 
-import { use_list } from './../Use/list.use'
+import { use_list } from '../../../utils/use.list.utils'
 
 export default defineComponent({
 

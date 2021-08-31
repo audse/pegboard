@@ -9,7 +9,7 @@
             <Heading h2 :title="board.name" :subtitle="board.description" padding="q-py-lg" />
             </q-item-section>
             <q-item-section side>
-                <q-btn @click="show_modal=true" color="accent" flat label="Edit" />
+                <q-btn @click="show_modal=true" color="text" flat label="Edit" />
             </q-item-section>
         </q-item>
         <q-item>
@@ -36,7 +36,7 @@ import { defineComponent, computed, watch, onMounted, ref, onBeforeMount } from 
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 
-import { use_theme } from './../components/Nested/Use/theme.use'
+import { use_theme } from '../utils/use.theme.utils'
 
 import EditBoardModal from './../components/Nested/Modals/Edit_Board.modal'
 import ListSheet from './../components/Nested/Sheets/List.sheet'

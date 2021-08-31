@@ -32,7 +32,7 @@
 import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
 
-import { use_board } from './../Use/board.use'
+import { use_board } from './../../../utils/use.board.utils'
 
 import ThemeSelector from './../ThemeSelector'
 

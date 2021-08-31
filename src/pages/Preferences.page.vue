@@ -18,7 +18,7 @@
 <script>
 import { defineComponent, onMounted } from 'vue'
 
-import { use_preference } from './../components/Nested/Use/preference.use'
+import { use_preference } from '../utils/use.preference.utils'
 import ThemePreference from './../components/Nested/Theme.preference'
 
 export default defineComponent({

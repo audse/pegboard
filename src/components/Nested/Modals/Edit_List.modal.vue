@@ -26,7 +26,7 @@
 import { defineComponent, ref, computed } from 'vue'
 import { useStore } from 'vuex'
 
-import { use_list } from './../Use/list.use'
+import { use_list } from '../../../utils/use.list.utils'
 
 export default defineComponent({
     

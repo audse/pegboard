@@ -33,6 +33,7 @@ export default defineComponent({
         col_4: Boolean,
         col_list: Boolean,
         gutter_sm: Boolean,
+        gutter_md: Boolean,
         horizontal: Boolean,
 
         delay: Number,
@@ -60,6 +61,7 @@ export default defineComponent({
             let class_string = ''
             if ( props.col_4 || props.col_list ) class_string += ' row'
             if ( props.gutter_sm ) class_string += ' q-col-gutter-sm'
+            if ( props.gutter_md ) class_string += ' q-col-gutter-md'
             if ( props.horizontal ) class_string += ' no-wrap'
             return class_string
         })

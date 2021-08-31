@@ -6,9 +6,9 @@
     Usually nested within a draggable element.
 -->
 <div :class="class_list.container">
-    <Sheet v-if="board" :label="board.name" :classes="{label:'text-h6 weight-semibold', content:'text-scale-text-5 q-pl-md'}" shadow separator :handle="handle">
+    <Sheet v-if="board" :label="board.name" :classes="{label:'text-h6 weight-semibold', content:'text-scale-text-5 q-pl-md'}" :handle="handle">
         <template #button>
-            <q-btn @click="show_modal=true" color="emphasis" round flat icon="tune" />
+            <q-btn @click="show_modal=true" color="scale-text-2" round flat icon="tune" />
         </template>
         <template #content>
             {{ board.description }}

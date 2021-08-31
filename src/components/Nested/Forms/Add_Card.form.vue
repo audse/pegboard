@@ -12,7 +12,7 @@
 
 import { defineComponent } from 'vue'
 
-import { use_card } from './..//Use/card.use'
+import { use_card } from '../../../utils/use.card.utils'
 
 export default defineComponent({
 

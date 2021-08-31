@@ -26,7 +26,7 @@
 import { defineComponent, computed } from 'vue'
 import { getCssVar } from 'quasar'
 
-import { use_color_form, use_auto_color } from './../Nested/Use/colors.use'
+import { use_color_form, use_auto_color } from '../../utils/use.colors.utils'
 
 export default defineComponent({
 
@@ -64,7 +64,7 @@ export default defineComponent({
         const style = computed( () => {
             return {
                 backgroundColor: props.bg || getCssVar('primary'),
-                color: props.text || getCssVar('accent'),
+                color: props.text || getCssVar('text'),
                 width: '100%'
             }
         })

@@ -5,7 +5,7 @@
     !small ? 'full-width' : '',
     shadow ? 'soft-shadow' : '',
     light ? 'bg-primary' : 'bg-scale-secondary-6',
-    'text-accent',
+    'text-text',
     classList.sheet ? classList.sheet : ''
     ]">
 

@@ -5,7 +5,7 @@
     <div class="text-h4">
         {{ current_user.displayName || 'Pegboard' }}
     </div>
-    <div class="text-subtitle-1 text-info">{{ current_user.email }}</div>
+    <div class="text-subtitle-1 text-emphasis">{{ current_user.email }}</div>
 </div>
 
 <q-list class="q-mt-md">
@@ -16,7 +16,7 @@
 
 <div class="fixed-bottom-left q-px-md q-py-lg">
     <q-btn flat color="negative" label="sign out" @click="signOut()" />
-    <q-btn flat color="info" label="Preferences" to="/preferences" />
+    <q-btn flat color="emphasis" label="Preferences" to="/preferences" />
 </div>
 
 </template>

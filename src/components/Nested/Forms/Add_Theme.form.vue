@@ -33,7 +33,7 @@
                     <template #label>
                         <div class="q-mt-sm q-pl-xs q-pb-sm" :style="!advanced?'opacity:0.5':''">
                             <span class="weight-bold">Other Colors</span>
-                            <div class="q-pt-xs text-primary-tint-75">These colors are used when performing various actions.</div>
+                            <div class="q-pt-xs text-scale-text-7">These colors are used when performing various actions.</div>
                         </div>
                     </template>
                     <template #before-content>
@@ -93,8 +93,8 @@
 
 import { defineComponent, onMounted } from 'vue'
 
-import { use_theme } from './../Use/theme.use'
-import { use_color_form, use_auto_color } from './../Use/colors.use'
+import { use_theme } from '../../../utils/use.theme.utils'
+import { use_color_form, use_auto_color } from '../../../utils/use.colors.utils'
 import ThemeSheet from './../Sheets/Theme.sheet'
 
 export default defineComponent({

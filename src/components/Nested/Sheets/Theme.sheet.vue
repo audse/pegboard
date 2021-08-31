@@ -152,8 +152,8 @@ message="Are you sure you want to delete this theme? This action cannot be undon
 
 import { defineComponent, computed, watch, reactive, ref } from 'vue'
 
-import { use_color_form, use_auto_color } from './../Use/colors.use'
-import { use_theme } from './../Use/theme.use'
+import { use_color_form, use_auto_color } from '../../../utils/use.colors.utils'
+import { use_theme } from '../../../utils/use.theme.utils'
 import chroma from 'chroma-js'
 
 export default defineComponent({

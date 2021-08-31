@@ -1,6 +1,6 @@
 <template>
 
-<q-page class="q-px-lg q-py-lg">
+<q-page class="q-px-lg q-py-lg dark-bg">
 
 <AddBoardForm classes="q-mb-md" />
 <!-- <Heading h2 title="Your Boards" padding="q-my-lg q-pt-lg" /> -->
@@ -8,7 +8,7 @@
 <!-- All Boards -->
 <div v-if="boards_exist">
 
-    <Drag v-model="boards" v-slot="element_props" col_4 gutter_sm>
+    <Drag v-model="boards" v-slot="element_props" col_4 gutter_md>
         <BoardSheet :board_id="element_props.element._id" :index="element_props.index" handle />
     </Drag>
 
@@ -74,3 +74,6 @@ export default defineComponent({
 })
 
 </script>
+<style lang="scss">
+
+</style>

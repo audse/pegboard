@@ -21,7 +21,7 @@
 
 import { defineComponent, ref, reactive } from 'vue'
 
-import { use_board } from './../Use/board.use'
+import { use_board } from './../../../utils/use.board.utils'
 
 export default defineComponent({
 

@@ -34,11 +34,9 @@
 <script>
 
 
-import { defineComponent, ref, computed, watch, onBeforeMount } from 'vue'
-import { colors, getCssVar } from 'quasar'
+import { defineComponent, ref } from 'vue'
 import { useStore } from 'vuex'
 
-import { use_theme } from './../components/Nested/Use/theme.use'
 import Sidebar from './Sidebar.vue'
 
 export default defineComponent({
@@ -72,8 +70,3 @@ export default defineComponent({
 
 })
 </script>
-<style lang="scss">
-
-// @import './../css/theme.scss';
-
-</style>

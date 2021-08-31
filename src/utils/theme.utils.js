@@ -1,6 +1,6 @@
 import { computed } from 'vue'
 import { Dark, setCssVar, LocalStorage } from 'quasar'
-import { use_auto_color } from 'src/components/Nested/Use/colors.use'
+import { use_auto_color } from './use.colors.utils'
 
 const get_and_set_theme = (store) => {
 
@@ -67,17 +67,24 @@ const get_and_set_theme = (store) => {
 
         setCssVar('primary', theme.primary)
         setCssVar('secondary', theme.secondary)
-        setCssVar('text', theme.text)
-        setCssVar('emphasis', theme.emphasis)
         setCssVar('warning', theme.warning)
         setCssVar('negative', theme.negative)
 
+        // setCssVar('text', theme.text)
+        // setCssVar('emphasis', theme.emphasis)
+        
+        document.body.style.setProperty('--q-emphasis', theme.emphasis)
+        document.body.style.setProperty('--q-text', theme.text)
+
         // Color scales
         for ( let i=0; i<9; i++ ) {
-            const string_01 = `scale-secondary-${i.toString()}`
-            const string_02 = `scale-text-${i.toString()}`
-            setCssVar( string_01, theme.scale_secondary[i] )
-            setCssVar( string_02, theme.scale_text[i] )
+            const string_01 = `--q-scale-secondary-${i.toString()}`
+            const string_02 = `--q-scale-text-${i.toString()}`
+            // setCssVar( string_01, theme.scale_secondary[i] )
+            // setCssVar( string_02, theme.scale_text[i] )
+
+            document.body.style.setProperty(string_01, theme.scale_secondary[i])
+            document.body.style.setProperty(string_02, theme.scale_text[i])
         }
 
     }

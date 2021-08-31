@@ -73,12 +73,12 @@ export default defineComponent({
 
 .expandable-dark {
     background: $secondary;
-    // color: $text;
+    color: $text;
 }
 
 .expandable-light {
-    // background: $scale-text-0;
-    // color: $text;
+    background: $scale-text-0;
+    color: $text;
 }
 
 </style>

@@ -2,6 +2,7 @@
 import { ref, reactive, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useQuasar } from 'quasar'
+import { get_and_set_theme } from './theme.utils'
 
 const use_preference = () => {
 
@@ -28,6 +29,12 @@ const use_preference = () => {
         form.user_id = user_id
         store.dispatch('preference/find_by_user_id_and_update', form ).then( result => {
             q.notify( { color: 'secondary', message: 'Preferences Saved.' })
+            if ( result.data.theme_id ) {
+                const {
+                    set_theme_from_preferences
+                } = get_and_set_theme(store)
+                set_theme_from_preferences(user_id)
+            }
         })
     }
 
