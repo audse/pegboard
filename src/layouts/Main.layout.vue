@@ -64,15 +64,6 @@ export default defineComponent({
 
     },
 
-    mounted () {
-
-        if ( colors.brightness(getCssVar('primary')) < 128 ) {
-            this.$q.dark.set(true)
-        } else {
-            this.$q.dark.set(false)
-        }
-    },
-
     computed: {
       breadcrumbs: function () {
           return this.$route.meta.breadcrumb ? this.$route.meta.breadcrumb(this.$route) : undefined
@@ -81,3 +72,8 @@ export default defineComponent({
 
 })
 </script>
+<style lang="scss">
+
+// @import './../css/theme.scss';
+
+</style>

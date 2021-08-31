@@ -4,7 +4,7 @@
 <q-card flat :class="[
     !small ? 'full-width' : '',
     shadow ? 'soft-shadow' : '',
-    light ? 'bg-primary' : 'bg-scale-secondary-7',
+    light ? 'bg-primary' : 'bg-scale-secondary-6',
     'text-accent',
     classList.sheet ? classList.sheet : ''
     ]">
@@ -49,7 +49,7 @@
     </div>
 
     <q-card-section v-if="!nocontent" :class="[
-        !light ? 'bg-scale-secondary-5' : '',
+        !light ? 'bg-scale-secondary-4' : '',
         classList.content ? classList.content : 'text-scale-accent-3 q-pa-sm'
         ]">
 
