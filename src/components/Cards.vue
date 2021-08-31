@@ -2,7 +2,7 @@
 <template>
 
 <Drag v-model="cards" v-slot="element_props" group="cards" :delay="25">
-    <CardSheet :card_id="element_props.element._id" :list_id="element_props.element.list_id" :board_id="element_props.element.board_id" nosubtitle />
+    <CardSheet :order="element_props.index" :card_id="element_props.element._id" :list_id="element_props.element.list_id" :board_id="element_props.element.board_id" nosubtitle />
 </Drag>
 
 <AddCardForm :board_id="board_id" :list_id="list_id" />
@@ -33,7 +33,13 @@ export default defineComponent({
 
         const store = useStore()
         const user_id = store.getters['auth/user_id']
-        const cards = computed( () => store.getters['card/find_by_list'](props.board_id, props.list_id) )
+        const cards = computed( {
+            get () { 
+                return store.getters['card/find_by_list'](props.board_id, props.list_id)
+            }, set (value) {
+                console.log(value)
+            }
+        })
 
         const load_cards = async () => {
 

@@ -47,6 +47,8 @@ export default defineComponent({
         card_id: String,
         board_id: String,
         list_id: String,
+
+        order: Number,
     },
 
     components: {
