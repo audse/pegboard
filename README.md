@@ -1,6 +1,18 @@
-# pegboard
+# pegboard -  a flexible project management app
 
-Pegboard is a flexible project management app.
+The core principle of Pegboard is to organize the way you would in real life- an endlessly customizable dumping ground for all your great ideas.
+
+## Technologies
+
+Pegboard was built using:
+#### Backend
+* Node.js
+* Express
+* MongoDB/Mongoose
+
+#### Frontend
+* Vue 3
+* Quasar
 
 ## Install the dependencies
 ```bash
@@ -21,6 +33,3 @@ npm run lint
 ```bash
 quasar build
 ```
-
-### Customize the configuration
-See [Configuring quasar.conf.js](https://v2.quasar.dev/quasar-cli/quasar-conf-js).
