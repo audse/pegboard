@@ -4,32 +4,28 @@ The core principle of Pegboard is to organize the way you would in real life- an
 
 ## Technologies
 
-Pegboard was built using:
-#### Backend
+### Backend
 * Node.js
 * Express
 * MongoDB/Mongoose
 
-#### Frontend
+### Frontend
 * Vue 3
 * Quasar
 
-## Install the dependencies
-```bash
-npm install
-```
+## Features
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
+* Create boards, lists, and cards to organize your thoughts.
+* Automatically generate beautiful color themes.
+* Drag & drop pretty much everything for flexible organization.
+* Choose what information is most important to display prominently.
 
-### Lint the files
-```bash
-npm run lint
-```
+## Roadmap
 
-### Build the app for production
-```bash
-quasar build
-```
+Pegboard is currently still under development. In the future, there are plans to implemenet the following features:
+* Calendar view
+* Text search
+* Quick actions on card fronts
+* Work within a team
+* Upload attachments
+* Nested cards & lists
