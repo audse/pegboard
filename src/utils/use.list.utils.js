@@ -22,7 +22,7 @@ const use_list = ( emit, board_id, current_list ) => {
     }
     
     const find_by_id_and_update = async () => {
-        
+        console.log(form, current_list)
         if ( current_list ) store.dispatch('list/find_by_id_and_update', { list_id: current_list._id, data: form }).then( result => {
             emit('hide')
         })

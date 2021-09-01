@@ -1,11 +1,13 @@
 
 <template>
 
-<TextInput v-model="form.name" label="Add Card" dense classes="q-ma-sm q-mt-lg">
-    <template #button>
-        <q-btn @click="add_card" label="Add" flat />
-    </template>
-</TextInput>
+<q-form @submit.prevent="add_card">
+    <TextInput v-model="form.name" :name="`add_card_${list_id}`" label="Add Card" dense classes="q-ma-sm q-mt-lg">
+        <template #button>
+            <q-btn type="submit" label="Add" flat />
+        </template>
+    </TextInput>
+</q-form>
 
 </template>
 <script>
@@ -24,7 +26,7 @@ export default defineComponent({
     },
 
     setup ( props, { emit } ) {
-
+        
         const {
             form,
             error,

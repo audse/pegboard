@@ -18,7 +18,9 @@ const use_card = ( emit, board_id, list_id, current_card ) => {
         form.user_id = store.getters['auth/user_id']
         form.board_id = board_id
         form.list_id = list_id
-        store.dispatch('card/add', form)
+        store.dispatch('card/add', form).then( result => {
+            clear_form()
+        })
     }
 
     const find_by_id_and_update = async () => {

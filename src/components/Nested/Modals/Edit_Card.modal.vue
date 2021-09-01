@@ -3,14 +3,20 @@
     
 <Modal :show="show_modal" :error="error" @hide="this.$emit('hide')">
     <template #header>
-        Edit Card
         <q-space />
         <q-btn @click="this.$emit('hide')" color="info" round flat dense icon="close" />
     </template>
     <template #content>
 
-        <TextInput v-model="form.name" label="Card Name" />
-        <TextInput v-model="form.content" label="Content" type="textarea" />
+        <!-- <TextInput v-model="form.name" label="Card Name" /> -->
+        <div>
+        <Heading h6 :title="form.name" />
+        <PopInput v-model="form.name" :name="`edit_card_name_${form._id}`" />
+        </div>
+
+        <!-- <q-editor v-model="form.content" /> -->
+        <!-- <EditorInput v-model="form.content" /> -->
+        <TextInput v-model="form.content" type="textarea" />
 
         <q-btn-toggle v-model="form.display" class="q-my-md" spread no-caps rounded unelevated toggle-color="info" toggle-text-color="primary" color="secondary" text-color="info" :options="options_display" />
 

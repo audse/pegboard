@@ -57,8 +57,6 @@ const get_and_set_theme = (store) => {
 
     const set_theme = async (theme) => {
 
-        console.log('Setting theme...', theme)
-
         const {
             is_dark,
         } = use_auto_color()
@@ -72,7 +70,7 @@ const get_and_set_theme = (store) => {
 
         // setCssVar('text', theme.text)
         // setCssVar('emphasis', theme.emphasis)
-        
+
         document.body.style.setProperty('--q-emphasis', theme.emphasis)
         document.body.style.setProperty('--q-text', theme.text)
 

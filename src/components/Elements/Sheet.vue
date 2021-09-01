@@ -32,7 +32,7 @@
                     {{ label }}
                     <slot name="label"></slot>
                 </div>
-                <div v-if="subtitle" class="text-scale-text-4">
+                <div v-if="subtitle" :class="[ classList.subtitle ? classList.subtitle : '', 'text-scale-text-4']">
                     <slot name="subtitle"></slot>
                 </div>
             </q-item-section>
