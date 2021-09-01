@@ -63,8 +63,6 @@ exports.find_by_id_and_update = ( request, response ) => {
 
     const id = request.params.id
 
-    const card_id = request.body.card_id || null
-
     const display = request.body.display || null
     const name = request.body.name || null
     const content = request.body.content || null
@@ -72,16 +70,15 @@ exports.find_by_id_and_update = ( request, response ) => {
     const date_due = request.body.date_due || null
     const date_todo = request.body.date_todo || null
 
-    const order = request.body.order || null
+    const order = request.body.order || 0
 
     let update = {}
-    if ( card_id ) update.card_id = card_id
     if ( display ) update.display = display
     if ( name ) update.name = name
     if ( content ) update.content = content
     if ( date_due ) update.date_due = date_due
     if ( date_todo ) update.date_todo = date_todo
-    if ( order ) update.order = order
+    if ( order !== undefined ) update.order = order
 
     update.updated = Date.now()
 

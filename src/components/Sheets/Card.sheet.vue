@@ -10,7 +10,7 @@
         <q-item-section>
             <Sheet shadow noactions dense :classes="{label:'q-pl-md text-smallheading text-scale-text-8 cursor-pointer', content:'q-pl-md text-scale-text-5'}" :nocontent="card.content?false:true">
                 <template #label>
-                    {{ form.name }}
+                    <span class="text-emphasis q-pr-sm">{{ form.order }} </span>  {{ form.name }}
                     <PopInput v-model="form.name" :name="`card_name_${card._id}`" @save_update="find_by_id_and_update" />
                 </template>
                 <template #button>
@@ -25,7 +25,7 @@
     <q-item v-if="card.display==='header'" class="q-py-md q-pl-xs q-pr-sm">
         <Sheet shadow :classes="{ header: 'q-px-xs', label: 'text-h6 cursor-pointer' }" handle nocontent noactions>
             <template #label>
-                {{ form.name }}
+                <span class="text-emphasis q-pr-sm">{{ form.order }} </span> {{ form.name }}
                 <PopInput v-model="form.name" :name="`card_name_${card._id}`" @save_update="find_by_id_and_update" />
             </template>
             <template #button>
@@ -41,7 +41,7 @@
 </template>
 <script>
 
-import { defineComponent, ref, computed } from 'vue'
+import { defineComponent, ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 
 import { use_card } from './../../utils/use.card.utils'

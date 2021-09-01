@@ -10,11 +10,12 @@
 </template>
 <script>
 
-import { defineComponent, onBeforeMount, computed, reactive } from 'vue'
+import { defineComponent, onBeforeMount, computed, reactive, ref } from 'vue'
 import { useStore } from 'vuex'
 
 import CardSheet from './Sheets/Card.sheet'
 import AddCardForm from './Forms/Add_Card.form'
+import { use_card } from 'src/utils/use.card.utils'
 
 export default defineComponent({
 
@@ -29,16 +30,29 @@ export default defineComponent({
         AddCardForm,
     },
 
-    setup ( props ) {
+    setup ( props, { emit } ) {
 
         const store = useStore()
         const user_id = store.getters['auth/user_id']
+
+        const {
+            update_order
+        } = use_card(emit, props.board_id, props.list_id)
+
+        const use_local_value = ref(false)
+        const local_value = ref([])
+
         const cards = computed( {
             get () { 
-                return store.getters['card/find_by_list_and_sort'](props.board_id, props.list_id)
+                if ( !use_local_value.value ) return store.getters['card/find_by_list_and_sort'](props.board_id, props.list_id)
+                else return local_value.value
             }, set (value) {
-                update_order(value)
-                return value
+                local_value.value = [...value]
+                use_local_value.value = true
+
+                update_order(value).then( result => {
+                    use_local_value.value = false
+                })
             }
         })
 
@@ -53,17 +67,6 @@ export default defineComponent({
             if ( props.board_id && props.list_id && user_id ) {
                 store.dispatch('card/find_by_list_and_reload', data)
             }
-        }
-
-        const update_order = (cards_in_list) => {
-            for ( const index in cards_in_list ) { 
-                const card = Object.assign( {}, cards_in_list[index] )
-                if ( card.order != index ) {
-                    card.order = index
-                    store.dispatch('card/find_by_id_and_update', { card_id: card._id, data: card })
-                }
-            }
-            
         }
 
         onBeforeMount( load_cards )

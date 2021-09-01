@@ -81,13 +81,6 @@ export default {
 
             }
         },
-
-        find_by_list_and_update_order ( state, data ) {
-            if ( data.board_id && data.list_id && data.cards ) {
-                let new_list = state.cards[data.board_id] ? state.cards[data.board_id].filter( card => card.list_id !== data.list_id ) : []
-                state.cards[data.board_id] = sort_by_order_and_updated([].concat(new_list, data.cards))
-            }
-        }
     },
 
     actions: {
@@ -150,28 +143,11 @@ export default {
             return new Promise( (resolve, reject) => {
 
                 if ( data && data.card_id ) {
-
                     CardService.find_by_id_and_update( data.card_id, data.data ).then( results => {
                         if ( results ) commit('find_by_id_and_save', {
                             board_id: results.data.board_id,
                             card: results.data
                         })
-                        resolve(results)
-
-                    }).catch( e => console.log(e) )
-
-                } else reject()
-
-            }).catch( e => console.log(e) )
-        },
-
-        async find_by_id_and_update_without_saving ( { commit }, data ) {
-            return new Promise( (resolve, reject) => {
-
-                if ( data && data.card_id ) {
-
-                    CardService.find_by_id_and_update( data.card_id, data.data ).then( results => {
-                        
                         resolve(results)
 
                     }).catch( e => console.log(e) )
