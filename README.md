@@ -2,6 +2,9 @@
 
 The core principle of Pegboard is to organize the way you would in real life- an endlessly customizable dumping ground for all your great ideas.
 
+![Pegboard Screenshot 1](/public/images/screenshot_01.png?raw=true)
+![Pegboard Screenshot 2](/public/images/screenshot_02.png?raw=true)
+
 ## Technologies
 
 ### Backend
@@ -22,7 +25,7 @@ The core principle of Pegboard is to organize the way you would in real life- an
 
 ## Roadmap
 
-Pegboard is currently still under development. In the future, there are plans to implemenet the following features:
+Pegboard is currently still under development. In the future, there are plans to implement the following features:
 * Calendar view
 * Text search
 * Quick actions on card fronts
