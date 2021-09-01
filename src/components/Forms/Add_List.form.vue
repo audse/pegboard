@@ -1,27 +1,29 @@
 
 <template>
 
-<Expandable label="Add List" icon="add">
+<q-form @submit.prevent="add_list" class="full-width q-mb-lg">
+<Expandable label="Add List" icon="add" classes="full-width">
     <template #before-content>
         <Warning :error="error" />
     </template>
     <template #content>
 
-        <TextInput v-model="form.name" label="List Name" />
-        <TextInput v-model="form.description" label="Description" />
+        <TextInput v-model="form.name" name="add_list_name" label="List Name" />
+        <TextInput v-model="form.description" name="add_list_description" label="Description" />
 
     </template>
     <template #actions>
-        <q-btn flat color="accent" label="Add" @click="add_list" />
+        <q-btn type="submit" flat color="emphasis" label="Add" />
     </template>
 </Expandable>
+</q-form>
 
 </template>
 <script>
 
 import { defineComponent } from 'vue'
 
-import { use_list } from '../../../utils/use.list.utils'
+import { use_list } from './../../utils/use.list.utils'
 
 export default defineComponent({
 

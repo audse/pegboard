@@ -13,7 +13,7 @@
             </q-item-section>
         </q-item>
         <q-item>
-            <AddListForm :board_id="board._id" classes="q-mb-md full-width" />
+            <AddListForm :board_id="board._id" />
         </q-item>
 
         <EditBoardModal :board_id="board._id" :show_modal="show_modal" @hide="show_modal=false"  />
@@ -32,15 +32,13 @@
 </template>
 <script>
 
-import { defineComponent, computed, watch, onMounted, ref, onBeforeMount } from 'vue'
+import { defineComponent, computed, watch, ref, onBeforeMount } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 
-import { use_theme } from '../utils/use.theme.utils'
-
-import EditBoardModal from './../components/Nested/Modals/Edit_Board.modal'
-import ListSheet from './../components/Nested/Sheets/List.sheet'
-import AddListForm from './../components/Nested/Forms/Add_List.form'
+import EditBoardModal from './../components/Modals/Edit_Board.modal'
+import ListSheet from './../components/Sheets/List.sheet'
+import AddListForm from './../components/Forms/Add_List.form'
 
 export default defineComponent({
 
@@ -97,14 +95,6 @@ export default defineComponent({
 
         onBeforeMount( load_data )
         watch( router, get_routes )
-
-        // const {
-        //     get_and_set_current_theme
-        // } = use_theme()
-
-        // onBeforeMount(get_and_set_current_theme(board.value ? board.value : null))
-
-        // watch( board.value, get_and_set_current_theme )
 
         return {
             route_id,

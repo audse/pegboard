@@ -33,10 +33,10 @@
 import { defineComponent, ref, computed, reactive } from 'vue'
 import { useStore } from 'vuex'
 
-import { use_list } from './../../../utils/use.list.utils'
+import { use_list } from './../../utils/use.list.utils'
 
 import EditListModal from './../Modals/Edit_List.modal'
-import Cards from './../../Cards'
+import Cards from './../Cards'
 
 export default defineComponent({
 

@@ -1,69 +1,83 @@
-
 <template>
+
+<div v-if="themes_exist">
     
-<q-list>
-        <q-item
-        v-for="theme in data" :key="theme.id"
-        class="q-pa-none">
-        
-            <!-- Radio Button -->
-            <q-radio 
-            v-model="newValue" :val="theme.data"
-            color="accent" class="q-pa-sm" />
-            
-            <!-- Label -->
-            <div class="q-pa-md full-width" :style="{
-            backgroundColor: theme.data.primary, 
-            color: theme.data.accent }">
-                {{ theme.data.name }}
-            </div>
+    <span v-for="option in options" :key="option.value" @click="local_value=option.value">
+        <q-chip :style="option.style">
+            <span v-if="option.value===local_value">
+                <q-icon name="check" :style="option.style" class="q-pr-sm" />
+            </span>
+            {{ option.label }}
+        </q-chip>
+    </span>
+</div>
 
-    </q-item>
-
-</q-list>
 
 </template>
-
 <script>
 
-import { defineComponent } from 'vue'
-
-import { cache } from './../mixins/cache'
+import { defineComponent, watch, computed, ref, onMounted } from 'vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
-    
+
     name: 'ThemeSelector',
 
-    props: ['modelValue'],
-
-    mixins: [cache],
-
+    props: {
+        modelValue: String,
+    },
+    
     emits: ['update:modelValue'],
 
-    data: function () {
+    setup ( props, { emit } ) {
+
+        const local_value = ref(props.modelValue)
+
+        const store = useStore()
+        
+        const user_id = store.getters['auth/user_id']
+
+        const themes = computed( () => store.state.theme.themes )
+
+        const themes_exist = computed( () => {
+            if ( themes.value.length > 0 ) return true
+            else return false
+        })
+
+        const load_themes = async () => {
+            if ( !themes_exist.value ) store.dispatch('theme/reload')
+        }
+
+        onMounted(load_themes)
+
+        const options = computed( () => {
+            return themes.value.map( theme => {
+                return {
+                    label: theme.name,
+                    value: theme._id,
+                    style: {
+                        color: theme.text,
+                        background: theme.primary,
+                    }
+                }
+            })
+        })
+
+        watch( local_value, () => {
+            emit('update:modelValue', local_value.value)
+        })
+
         return {
-
-            newValue: this.modelValue
+            local_value,
+            user_id,
+            themes,
+            themes_exist,
+            options,
         }
+
     },
 
-    mounted () {
-
-        if ( this.$auth ) {
-            this.path = { user: this.$auth.uid, theme: 'all' }
-        }
-    },
-
-    watch: {
-
-        modelValue: function () {
-            this.newValue = this.modelValue
-        },
-
-        newValue: function () {
-            this.$emit('update:modelValue', this.newValue)
-        }
-    }
 
 })
+
 </script>

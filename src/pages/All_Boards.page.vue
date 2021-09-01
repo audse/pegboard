@@ -2,7 +2,7 @@
 
 <q-page class="q-px-lg q-py-lg dark-bg">
 
-<AddBoardForm classes="q-mb-md" />
+<AddBoardForm />
 <!-- <Heading h2 title="Your Boards" padding="q-my-lg q-pt-lg" /> -->
 
 <!-- All Boards -->
@@ -24,8 +24,8 @@ import { defineComponent, onMounted, computed, ref } from 'vue'
 import { useStore } from 'vuex'
 
 // Components
-import AddBoardForm from './../components/Nested/Forms/Add_Board.form'
-import BoardSheet from './../components/Nested/Sheets/Board.sheet'
+import AddBoardForm from './../components/Forms/Add_Board.form'
+import BoardSheet from './../components/Sheets/Board.sheet'
 
 export default defineComponent({
 

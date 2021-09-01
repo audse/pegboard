@@ -14,7 +14,7 @@
 
 import { defineComponent } from 'vue'
 
-import { use_card } from '../../../utils/use.card.utils'
+import { use_card } from './../../utils/use.card.utils'
 
 export default defineComponent({
 

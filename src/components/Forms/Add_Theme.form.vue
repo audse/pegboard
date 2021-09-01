@@ -93,8 +93,8 @@
 
 import { defineComponent, onMounted } from 'vue'
 
-import { use_theme } from '../../../utils/use.theme.utils'
-import { use_color_form, use_auto_color } from '../../../utils/use.colors.utils'
+import { use_theme } from './../../utils/use.theme.utils'
+import { use_color_form, use_auto_color } from './../../utils/use.colors.utils'
 import ThemeSheet from './../Sheets/Theme.sheet'
 
 export default defineComponent({

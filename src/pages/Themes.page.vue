@@ -26,8 +26,8 @@
 import { defineComponent, onMounted, computed, ref } from 'vue'
 import { useStore } from 'vuex'
 
-import AddThemeForm from './../components/Nested/Forms/Add_Theme.form'
-import ThemeSheet from './../components/Nested/Sheets/Theme.sheet'
+import AddThemeForm from './../components/Forms/Add_Theme.form'
+import ThemeSheet from './../components/Sheets/Theme.sheet'
 
 export default defineComponent({
 

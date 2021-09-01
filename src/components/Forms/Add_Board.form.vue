@@ -1,27 +1,29 @@
 
 <template>
 
+<q-form @submit.prevent="add_board" class="q-mb-lg">
 <Expandable label="Add Board" icon="add">
     <template #before-content>
         <Warning :error="error" />
     </template>
     <template #content>
 
-        <TextInput v-model="form.name" label="Board Name" />
-        <TextInput v-model="form.description" label="Description" />
+        <TextInput v-model="form.name" name="add_board_name" label="Board Name" />
+        <TextInput v-model="form.description" name="add_board_description" label="Description" />
 
     </template>
     <template #actions>
-        <q-btn flat color="emphasis" label="Add" @click="add_board" />
+        <q-btn type="submit" flat color="emphasis" label="Add" />
     </template>
 </Expandable>
+</q-form>
 
 </template>
 <script>
 
 import { defineComponent, ref, reactive } from 'vue'
 
-import { use_board } from './../../../utils/use.board.utils'
+import { use_board } from './../../utils/use.board.utils'
 
 export default defineComponent({
 

@@ -45,7 +45,7 @@
 import { defineComponent, ref, computed } from 'vue'
 import { useStore } from 'vuex'
 
-import { use_card } from './../../../utils/use.card.utils'
+import { use_card } from './../../utils/use.card.utils'
 
 import EditCardModal from './../Modals/Edit_Card.modal'
 

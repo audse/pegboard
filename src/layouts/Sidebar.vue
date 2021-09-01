@@ -28,7 +28,7 @@ import { useStore } from 'vuex'
 
 import firebase from 'firebase'
 
-import BoardsList from './../components/Nested/BoardsList'
+import BoardsList from './../components/BoardsList'
 
 export default defineComponent({
 

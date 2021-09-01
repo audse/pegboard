@@ -13,8 +13,8 @@
 import { defineComponent, onBeforeMount, computed, reactive } from 'vue'
 import { useStore } from 'vuex'
 
-import CardSheet from './Nested/Sheets/Card.sheet'
-import AddCardForm from './Nested/Forms/Add_Card.form'
+import CardSheet from './Sheets/Card.sheet'
+import AddCardForm from './Forms/Add_Card.form'
 
 export default defineComponent({
 
