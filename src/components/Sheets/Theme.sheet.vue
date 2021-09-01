@@ -22,7 +22,8 @@ message="Are you sure you want to delete this theme? This action cannot be undon
                 <q-icon name="drag_indicator" class="handle" :style="{ color: scale_text[2] }" />
             </q-item-section>
             <q-item-section class="q-pa-none q-ma-none" :style="{ color: form.text }">
-                {{ label }}
+                {{ form.name || label }}
+                <PopInput v-if="show_form" v-model="form.name" />
             </q-item-section>
 
             <q-item-section v-if="show_form" side>

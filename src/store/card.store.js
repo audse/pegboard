@@ -1,6 +1,8 @@
 
 import CardService from './../../server/services/card.service'
 
+import { sort_by_order_and_updated  } from './../utils/sort.utils'
+
 export default {
 
     namespaced: true,
@@ -21,6 +23,11 @@ export default {
 
         find_by_list: state => (board_id, list_id) => {
             return state.cards[board_id] ? state.cards[board_id].filter( card => card.list_id === list_id ) : null
+        },
+
+        find_by_list_and_sort: state => (board_id, list_id) => {
+            const card_list = state.cards[board_id] ? state.cards[board_id].filter( card => card.list_id === list_id ) : null
+            if ( card_list ) return sort_by_order_and_updated(card_list)
         }
 
     },
@@ -74,6 +81,13 @@ export default {
 
             }
         },
+
+        find_by_list_and_update_order ( state, data ) {
+            if ( data.board_id && data.list_id && data.cards ) {
+                let new_list = state.cards[data.board_id] ? state.cards[data.board_id].filter( card => card.list_id !== data.list_id ) : []
+                state.cards[data.board_id] = sort_by_order_and_updated([].concat(new_list, data.cards))
+            }
+        }
     },
 
     actions: {
@@ -142,6 +156,22 @@ export default {
                             board_id: results.data.board_id,
                             card: results.data
                         })
+                        resolve(results)
+
+                    }).catch( e => console.log(e) )
+
+                } else reject()
+
+            }).catch( e => console.log(e) )
+        },
+
+        async find_by_id_and_update_without_saving ( { commit }, data ) {
+            return new Promise( (resolve, reject) => {
+
+                if ( data && data.card_id ) {
+
+                    CardService.find_by_id_and_update( data.card_id, data.data ).then( results => {
+                        
                         resolve(results)
 
                     }).catch( e => console.log(e) )

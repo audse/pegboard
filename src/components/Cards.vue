@@ -35,9 +35,10 @@ export default defineComponent({
         const user_id = store.getters['auth/user_id']
         const cards = computed( {
             get () { 
-                return store.getters['card/find_by_list'](props.board_id, props.list_id)
+                return store.getters['card/find_by_list_and_sort'](props.board_id, props.list_id)
             }, set (value) {
-                console.log(value)
+                update_order(value)
+                return value
             }
         })
 
@@ -52,6 +53,17 @@ export default defineComponent({
             if ( props.board_id && props.list_id && user_id ) {
                 store.dispatch('card/find_by_list_and_reload', data)
             }
+        }
+
+        const update_order = (cards_in_list) => {
+            for ( const index in cards_in_list ) { 
+                const card = Object.assign( {}, cards_in_list[index] )
+                if ( card.order != index ) {
+                    card.order = index
+                    store.dispatch('card/find_by_id_and_update', { card_id: card._id, data: card })
+                }
+            }
+            
         }
 
         onBeforeMount( load_cards )

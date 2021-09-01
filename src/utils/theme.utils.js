@@ -1,7 +1,7 @@
 import { computed } from 'vue'
 import { Dark, setCssVar, LocalStorage } from 'quasar'
 import { use_auto_color } from './use.colors.utils'
-
+ 
 const get_and_set_theme = (store) => {
 
     const set_theme_from_preferences = async (user_id) => {

@@ -2,7 +2,6 @@
 <template>
 
 <div class="relative">
-
     <!-- Card Display -->
     <q-item v-if="card.display==='card'" class="q-pl-none q-pr-sm">
         <q-item-section class="q-px-none q-mx-none" side>

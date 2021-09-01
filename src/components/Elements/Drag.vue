@@ -2,7 +2,7 @@
 <template>
 
 <div :class="horizontal? 'fit scroll-y hide-scrollbar q-pa-sm' : ''">
-<draggable v-model="local_value" item-key="_id" v-bind="drag_options" @start="dragging=true" @end="dragging=false" :class="drag_class">
+<draggable v-model="local_value" item-key="_id" v-bind="drag_options" @change="this.$emit('update_order')" @start="dragging=true" @end="dragging=false" :class="drag_class">
     <template #item="{ element, index }">
         <div class="col-xs-12 col-sm-6 col-lg-4">
             <transition appear @before-appear="stagger_start" @appear="stagger_start" @after-appear="stagger_end"
@@ -40,7 +40,7 @@ export default defineComponent({
 
     },
     
-    emits: ['update:modelValue'],
+    emits: ['update:modelValue', 'update_order'],
 
     components: {
         draggable,
